@@ -1,0 +1,1787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bonded Items Request Submission Form</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 1.5em;
+      background: linear-gradient(to right, #dbeafe, #f0f9ff);
+    }
+    h1 {
+      text-align: center;
+      color: #1e3a8a;
+      margin-bottom: 0.8em;
+      font-size: 1.8em;
+    }
+    form {
+      background-color: #ffffff;
+      padding: 1.5em;
+      border-radius: 10px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+      max-width: 750px;
+      margin: auto;
+    }
+    label {
+      display: block;
+      margin-top: 0.8em;
+      font-weight: 600;
+      color: #1e293b;
+      font-size: 0.95em;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 0.5em;
+      margin-top: 0.2em;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+      height: 36px;
+      box-sizing: border-box;
+      font-size: 0.95em;
+    }
+    textarea {
+      height: auto;
+    }
+    input:focus, select:focus, textarea:focus {
+      background-color: #e3f2fd;
+      border-color: #3b82f6;
+      box-shadow: 0 0 4px rgba(59, 130, 246, 0.4);
+      outline: none;
+    }
+    input.filled, select.filled {
+      background-color: #e6ffed;
+      border-color: #34d399;
+    }
+    .row {
+      display: flex;
+      gap: 1.5em;
+      flex-wrap: wrap;
+      margin-bottom: 0.3em;
+    }
+    .row > div {
+      flex: 1;
+      min-width: 220px;
+    }
+
+.item-row {
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+  margin-top: 0.8em;
+  flex-wrap: nowrap;
+}
+
+/* ✅ Item input box বড় */
+.item-row input[list="itemList"] {
+  flex: 5;
+  min-width: 60%;
+  height: 42px;
+  font-size: 1em;
+  padding: 0.4em;
+}
+
+/* ✅ Quantity input ছোট */
+.item-row input[type="number"] {
+  flex: 1;
+  max-width: 12%;
+  height: 34px;
+  font-size: 0.9em;
+  padding: 0.3em;
+}
+
+/* ✅ Quantity type select ছোট */
+.item-row select[name="quantityType[]"] {
+  flex: 1;
+  max-width: 12%;
+  height: 34px;
+  font-size: 0.9em;
+  padding: 0.3em;
+}
+
+/* ✅ Delete button styling */
+.item-row button {
+  flex: 0;
+  height: 34px;
+  font-size: 1em;
+  background-color: #f87171;
+  color: white;
+  border: none;
+  padding: 0 0.6em;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.item-row button:hover {
+  background-color: #ef4444;
+}
+
+    .button-group {
+      margin-top: 1.5em;
+      display: flex;
+      justify-content: space-between;
+    }
+    button {
+      padding: 0.6em 1.5em;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      font-size: 0.95em;
+    }
+    button[type="submit"] {
+      background-color: #3b82f6;
+      color: white;
+    }
+    button[type="submit"]:hover {
+      background-color: #2563eb;
+    }
+    button[type="reset"] {
+      background-color: #f87171;
+      color: white;
+    }
+    button[type="reset"]:hover {
+      background-color: #ef4444;
+    }
+    h2 {
+      margin-top: 1.5em;
+      color: #1e3a8a;
+      border-bottom: 2px solid #3b82f6;
+      padding-bottom: 0.2em;
+      font-size: 1.4em;
+    }
+  </style>
+</head>
+<body>
+  <h1>Bonded Items Request Submission Form</h1>
+  <form id="requestForm">
+    <div class="row">
+      <div>
+        <label for="timestamp">Date & Time</label>
+        <input type="datetime-local" id="timestamp" name="timestamp">
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <label for="requestFor">Request For</label>
+        <select id="requestFor" name="requestFor">
+          <option value="">-- Select --</option>
+          <option value="AIRLINES PRODUCTS">AIRLINES PRODUCTS</option>
+          <option value="EKFC PRODUCTS">EKFC PRODUCTS</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <label for="airlineCodeBox">Airline Code / EKFC</label>
+        <input list="airlineCodesList" id="airlineCodeBox" name="airlineCodeBox" placeholder="Start typing...">
+        <datalist id="airlineCodesList">
+          <option value="AX - AIRX CHARTER LTD">
+          <option value="EB - WAMOS AIR S.A.">
+          <option value="FO - FELIX AIRWAYS">
+          <option value="HH - AIR HAMBURG">
+<!-- Add new airlines here -->
+<option value="AX - AIRX CHARTER LTD">
+<option value="EB - WAMOS AIR S.A.">
+<option value="FO - FELIX AIRWAYS">
+<option value="HH - QANOT SHARQ LLC">
+<option value="JU - AIR SERBIA A.D. BEOGRAD">
+<option value="KB - DRUKAIR ROYAL BHUTAN AIRLINES">
+<option value="KF - AIR BELGIUM S.A">
+<option value="LG - LUXAIR, SOCIÉTÉ LUXEMBOURGEOIS">
+<option value="LY - EL AL ISRAEL AIRLINES LTD">
+<option value="P6 - PRIVILEGE STYLE">
+<option value="QY - DHL AVIATION EEMEA B.S.C. CLOS">
+<option value="UB - MYANMAR NATIONAL AIRLINES">
+<option value="AHO - AIR HAMBURG LUFTVERKEHRSGESELL">
+<option value="FVE - FALCON ELITE DWC - LLC">
+<option value="JLX - JET LUXE MENA DMCC">
+<option value="KLJ - VERSLO SKRYDZIAI JSC">
+<option value="TLJ - THALAIR">
+<option value="1C - VARIG LOGISTICA S/A">
+<option value="2G - CARGOITALIA SPA">
+<option value="2P - AIRPHIL EXPRESS">
+<option value="2R - STAR AIRLINE">
+<option value="3D - DENIM AIR">
+<option value="3J - JUBBA AIRWAYS">
+<option value="3P - GEORGIAN AIRLINES">
+<option value="3Q - CHINA YUNNAN AIRLINES">
+<option value="3U - SICHUAN AIRLINES">
+<option value="3V - TNT AIRWAYS S.A.">
+<option value="4L - AIR ASTANA">
+<option value="4Q - SAFI AIRWAYS">
+<option value="4Z - AIRLINK INTERNATIONAL">
+<option value="5B - PALM AVIATION">
+<option value="5C - C.A.L. CARGO AIRLINES LTD.">
+<option value="5J - CEBU PACIFIC AIR">
+<option value="5K - HI FLY">
+<option value="5Q - ONUR AIR TAŞIMACILIK A.Ş">
+<option value="5Q. - BEST AIR">
+<option value="5X - UPS AIR COURIERS OF AMERICA">
+<option value="5Y - ATLAS AIR, INC.">
+<option value="6B - NOVAIR">
+<option value="6E - INTERGLOBE AVIATION LIMITED">
+<option value="6H - ISRAIR AIRLINES AND TOURISM LT">
+<option value="6P - GRYPHON AIRLINES">
+<option value="6T - LONG TAIL AVIATION">
+<option value="6U - AIR UKRAINE">
+<option value="7A - EXPRESS AIR CARGO">
+<option value="7B - KRAS AIR">
+<option value="7C - COYNE AIR">
+<option value="7K - KOLAVIA AIRLINES">
+<option value="7U - AVIA NERGO">
+<option value="7W - WINDROSE AIRLINES">
+<option value="7Z - LAKER AIRWAYS (BAHAMAS) LIMITE">
+<option value="8C - TNT AIRWAYS - UPDATED 19SEP11">
+<option value="8U - AFRIQIYAH AIRWAYS">
+<option value="9R - PHUKET AIRLINES CO., LTD.">
+<option value="9S - SOUTHERN AIRWAYS">
+<option value="9U - AIR MOLDOVA">
+<option value="9W - JET AIRWAYS (INDIA) LIMITED">
+<option value="9Y - AIR KAZAKHSTAN">
+<option value="A3 - AEGEAN AIRLINES S.A.">
+<option value="A4 - SOUTHERN WINDS S.A.">
+<option value="A9 - GEORGIAN AIRWAYS">
+<option value="AA - AMERICAN AIRLINES INC.">
+<option value="AB - AIR BERLIN GMBH & CO. LUFTVERK">
+<option value="AC - AIR CANADA">
+<option value="ACH - AIR CHEF HOLDINGS LLC">
+<option value="ACW - TITAN AIRWAYS">
+<option value="ADC - ADHOC AIRLINE - EKFC">
+<option value="AF - AIR FRANCE">
+<option value="AG - AIR CONTRACTORS (UK) LIMITED">
+<option value="AH - AIR ALGERIE">
+<option value="AHO - AIR HAMBURG">
+<option value="AHS - AHS AVIATION SERVICES (FZE)">
+<option value="AI - AIR-INDIA LIMITED">
+<option value="AJA - AJA PRIVATE JET">
+<option value="AJS - ALPINE JET SVCS.">
+<option value="AM - AEROMEXICO">
+<option value="AP - ALBASTAR S.A">
+<option value="AQ - ALOHA AIRLINES INC.">
+<option value="AR - AEROLINEAS ARGENTINAS">
+<option value="ARC - AL RAIS CARGO AGENCIES">
+<option value="AS - ALASKA AIRLINES INC.">
+<option value="ASM - AVIATION SERVICES MANAGEMENT">
+<option value="ASY - METEORFIELD PTY LTD - AUSTRAL">
+<option value="AT - ROYAL AIR MAROC">
+<option value="ATF - AIRBAS AIRLINES">
+<option value="ATN - INTERNATIONAL AIR SERVICES">
+<option value="ATS - AEROTRANSCARGO FZE">
+<option value="AU - CIELOS DEL SUR S.A.">
+<option value="AUR - AURORA JET FUEL DMCC">
+<option value="AV - AEROVIAS DEL CONTINENTE AMERIC">
+<option value="AW - ARAB WINGS C/O. RJ">
+<option value="AWC - TITAN AIRWAYS">
+<option value="AY - FINNAIR OYJ">
+<option value="AZ - ALITALIA - LINEE AEREE ITALIAN">
+<option value="AZM - AZMAR AIRLINES">
+<option value="B2 - BELAVIA">
+<option value="B3 - BELLVIEW AIRLINES LTD.">
+<option value="B4 - BEOND">
+<option value="B8 - ERITREAN AIRLINES">
+<option value="BA - BRITISH AIRWAYS P.L.C.">
+<option value="BD - BRITISH MIDLAND AIRWAYS LTD.">
+<option value="BE - JERSEY EUROPEAN AIRWAYS LIMITE">
+<option value="BG - BIMAN BANGLADESH AIRLINES LIMI">
+<option value="BGH - BH AIR">
+<option value="BI - ROYAL BRUNEI AIRLINES SDN. BHD">
+<option value="BIS - STAR AFRICAN AIRLINES">
+<option value="BLX - TUIFLY">
+<option value="BN - FORWARD AIR INTERNATIONAL AIRL">
+<option value="BP - AIR BOTSWANA CORPORATION">
+<option value="BQ - DJIBOUTI AIRLINES">
+<option value="BR - EVA AIRWAYS CORPORATION">
+<option value="BT - AIR BALTIC CORPORATION S.A.">
+<option value="BU - SAS BRAATHENS AS">
+<option value="BV - BLUE PANORAMA AIRLINES S.P.A.">
+<option value="BW - BWIA WEST INDIES AIRWAYS LIMIT">
+<option value="BXA - BEX AIR">
+<option value="BY - TUI AIRWAYS LIMITED">
+<option value="BYD - BEOND">
+<option value="C9 - CIRRUS AVIATION">
+<option value="CA - AIR CHINA">
+<option value="CAN - CLICK AVIATION NETWORK DMCC">
+<option value="CASH - ADHOC CASH">
+<option value="CC - MAGMA AVIATION LIMITED">
+<option value="CE - NATIONWIDE AIRLINES (PTY) LTD.">
+<option value="CI - CHINA AIRLINES">
+<option value="CK - CHINA CARGO AIRLINES LTD.">
+<option value="CL - LUFTHANSA CITYLINE GMBH">
+<option value="CM - COMPANIA PANAMENA DE AVIACION,">
+<option value="CMS - CAPTAIN MANAGEMENT SVCS INT'L">
+<option value="CO - CONTINENTAL AIRLINES, INC.">
+<option value="CRDT - ADHOC CREDIT">
+<option value="CS - CONTINENTAL MICRONESIA, INC.">
+<option value="CU - CUBANA DE AVIACION S.A.">
+<option value="CV - CARGOLUX AIRLINES INTERNATIONA">
+<option value="CW - AIR CARGO GLOBAL">
+<option value="CX - CATHAY PACIFIC AIRWAYS LTD.">
+<option value="CY - CYPRUS AIRWAYS LIMITED">
+<option value="CZ - CHINA SOUTHERN AIRLINES">
+<option value="D0 - DHL AIR">
+<option value="D3 - DAALLO AIRLINES">
+<option value="D6 - INTER-AVIATION SERVICES">
+<option value="DA - DUBAI AIRWING">
+<option value="DA1 - EQUATORIAL GUINEA">
+<option value="DA2 - AIR CARGO GLOBAL">
+<option value="DA3 - EXECUTIVE JETS MANAGEMENT">
+<option value="DA4 - M-JET">
+<option value="DA5 - BRAZILIAN AIRFORCE">
+<option value="DA6 - STATE AIR ENTERPRISE 'UKRAINE'">
+<option value="DA7 - KENYA AIRFORCE">
+<option value="DA8 - DC AVIATION AL FUTTAIM CO. LLC">
+<option value="DAM - DAMAL AIR">
+<option value="DCA - DUBAI CIVIL AVAIATION">
+<option value="DCS - DC AVIATION GmbH">
+<option value="DCS. - DC AVIATION AL FUTTAIM">
+<option value="DE - CONDOR AIRLINES">
+<option value="DFS - DFS Middle East F.Z.E.">
+<option value="DHL - DHL AVIATION EEMEA B.S.C.">
+<option value="DI - DBA LUFTFAHRTGESELLSCHAFT MBH">
+<option value="DJB - DJIBOUTI AIR">
+<option value="DL - DELTA AIR LINES INC.">
+<option value="DM - MAERSK AIR A.S.">
+<option value="DNA - DNA â€“ ADHOC SERVICES">
+<option value="DNL - DNATA - LOUNGE SERVICES">
+<option value="DNS - DNATA - SPECIFIC SERVICES">
+<option value="DSA - DIAMOND SAKA AIRLINE">
+<option value="DT - TAAG - LINHAS AEREAS DE ANGOLA">
+<option value="DU - HEMUS AIR">
+<option value="DU1 - SPIRIANT GmbH">
+<option value="DU2 - SKYLOGISTIX GmbH">
+<option value="DU3 - FINE DINING FLIGHT">
+<option value="DU4 - EJME PORTUGAL AIRCRAFT MANAGEM">
+<option value="DU5 - STARLING AVIATION">
+<option value="DU6 - MAXIMUS">
+<option value="DU7 - AVANGARD AVIATION">
+<option value="DU8 - ELITAVIA Gmbh">
+<option value="DU9 - JET STORY">
+<option value="DV - SCAT AIRLINES">
+<option value="DY - NORWEGIAN AIRLINES">
+<option value="E0 - EOS AIRLINE">
+<option value="E4 - AERO ASIA INTERNATIONAL (PRIVA">
+<option value="E5 - SAMARA AIRLINES">
+<option value="E8 - ALPI EAGLES S.P.A.">
+<option value="EA - EUROPEAN AIR EXPRESS">
+<option value="EAS - ETIHAD AIRWAYS PJSC">
+<option value="EAV - EUROPEAN AVIATION">
+<option value="EB - WAMOS">
+<option value="ED - AIR BLUE">
+<option value="EE - AEROTECH AVIATION">
+<option value="EI - AER LINGUS LIMITED">
+<option value="EIA - EVERGREN INT'L">
+<option value="EJA - NET JETS">
+<option value="EJB - EXECUJET MIDDLE EAST LLC">
+<option value="EK - EMIRATES">
+<option value="EKC - EMIRATES SKY CARGO">
+<option value="EP - IRAN ASEMAN AIRLINES">
+<option value="ESJ - EASTERN SKY JETS">
+<option value="ET - ETHIOPIAN AIRLINES ENTERPRISE">
+<option value="ETJ - SKY LINK ARABIA">
+<option value="EW - EUROWINGS AG">
+<option value="EXE - EXECUTIVE FLIGHT SERVICES">
+<option value="EY - ETIHAD AIRWAYS">
+<option value="F4 - ALBARKA AIR SERVICES LTD.">
+<option value="F5 - AEROTRANSCARGO">
+<option value="FA - SAFAIR (PROPRIETARY) LTD.">
+<option value="FAS - FLY AVIATION SERVICES">
+<option value="FCA - FIRST CHOICE AIRWAYS">
+<option value="FDN - FLYING DOLPHIN">
+<option value="FG - ARIANA AFGHAN AIRLINES">
+<option value="FI - ICELANDAIR">
+<option value="FJ - AIR PACIFIC LTD.">
+<option value="FKS - FOCUS AIR">
+<option value="FM - SHANGHAI AIRLINES CO. LTD.">
+<option value="FO - FELIX AIRWAYS">
+<option value="FQ - THOMAS COOK AIRLINES">
+<option value="FV - ROSSIYA AIRLINES">
+<option value="FVS - FALCON AVIATION SERVICES">
+<option value="FX - FEDEX">
+<option value="FZ - DUBAI AVIATION CORPORATION">
+<option value="G8 - GO AIR">
+<option value="GA - GARUDA INDONESIA">
+<option value="GAA - GLOBAL AFRICA AVIATION">
+<option value="GE - TRANSASIA AIRWAYS CORPORATION">
+<option value="GF - GULF AIR COMPANY">
+<option value="GGO - AEROVISTA">
+<option value="GH - GHANA AIRWAYS CORP.">
+<option value="GLX - GALAXY AIRLINES">
+<option value="GN - AIR GABON">
+<option value="GSS - GLOBAL SERVICE SOLUTION FZCO">
+<option value="GT - GB AIRWAYS LTD.">
+<option value="GTS - GATS AIRLINE">
+<option value="GU - AVIATECA, S.A.">
+<option value="GW - KUBAN AIRLINES">
+<option value="GWG - GULF WINGS  FZE">
+<option value="H9 - HIMALAYA AIRLINES">
+<option value="HF - HAPAG LLOYD FLUGGESELLSCHAFT">
+<option value="HHI - HAMBURG INTERNATIONAL">
+<option value="HIS - HADID INT'L SERVICES">
+<option value="HM - AIR SEYCHELLES LIMITED">
+<option value="HOA - HOLA AIRLINES">
+<option value="HP - AMERICA WEST AIRLINES INC.">
+<option value="HR - HAHN AIR LINES">
+<option value="HU - HAINAN AIRLINES COMPANY LIMITE">
+<option value="HV - TRANSAVIA AIRLINES">
+<option value="HY - UZBEKISTAN AIRWAYS">
+<option value="I7 - INTER-ILES AIRLINE">
+<option value="IA - IRAQI AIRWAYS">
+<option value="IB - IBERIA - LINEAS AEREAS DE ESPA">
+<option value="IC - INDIAN AIRLINES">
+<option value="IE - SOLOMON AIRLINES">
+<option value="IG - AIR ITALY S.p.A">
+<option value="IH - FALCON AIR AB">
+<option value="IJ - GREAT WALL AIRLINES">
+<option value="IN - MACEDONIAN AIRLNES">
+<option value="IR - IRAN AIR">
+<option value="IRQ - QUESHM AIR">
+<option value="IV - AIR DJIBOUTI">
+<option value="IX - AIR INDIA EXPRESS">
+<option value="IY - YEMENIA - YEMEN AIRWAYS">
+<option value="IZ - ARKIA - ISRAELI AIRLINES LTD">
+<option value="J2 - AZERBAIJAN AIRLINES">
+<option value="J2. - AZERBAIJAN AIRLINES GOVERNMENT">
+<option value="J4 - BADR AIRLINES">
+<option value="J9 - JAZEERA AIRWAYS">
+<option value="JA - AIR BOSNA">
+<option value="JAV - JORDAN AVIATION">
+<option value="JBJ - JET AVIATION BUSINESS JETS  AG">
+<option value="JCA - JET CLUB AVIATION">
+<option value="JJ - TAM LINHAS AEREAS S.A.">
+<option value="JK - SPANAIR S.A.">
+<option value="JL - JAPAN AIRLINES INTERNATIONAL C">
+<option value="JM - AIR JAMAICA">
+<option value="JO - JALWAYS CO. LTD.">
+<option value="JP - ADRIA AIRWAYS - THE AIRLINE OF">
+<option value="JPT - JUPITER AIRLINES">
+<option value="JR - AERO CALIFORNIA">
+<option value="JS - AIR KORYO">
+<option value="JT - JETEX">
+<option value="JTG - ZAS AIR">
+<option value="JTI - IMPERIAL JET">
+<option value="JU - AIR SERBIA AD BEOGRAD">
+<option value="JUB - JUBBA AIRWAYS">
+<option value="JX - JETT8 AIRLINE">
+<option value="JZ - SKYWAYS AB">
+<option value="K4 - KALITTA AIR">
+<option value="KA - HONG KONG DRAGON AIRLINES LIMI">
+<option value="KAR - PEGAS FLY">
+<option value="KC - AIR ASTANA">
+<option value="KD - WESTERN GLOBAL AIRLINES">
+<option value="KE - KOREAN AIR LINES CO. LTD.">
+<option value="KF - BLUE1 OY">
+<option value="KIL - KUBAN AIRLINE">
+<option value="KK - ATLASJET ULUSLARARASI HAVACILI">
+<option value="KL - KLM ROYAL DUTCH AIRLINES">
+<option value="KLE - RUSAERO">
+<option value="KM - AIR MALTA P.L.C.">
+<option value="KQ - KENYA AIRWAYS">
+<option value="KR - KITTY HAWK AIRCARGO, INC.">
+<option value="KRD - KURDISTAN AIRLINES">
+<option value="KU - KUWAIT AIRWAYS">
+<option value="KVS - KUWAIT AVIATION SVCS CO.">
+<option value="KZ - NIPPON CARGO AIRLINES">
+<option value="L4 - LAUDA AIR S.P.A.">
+<option value="L6 - AIR MALDIVES">
+<option value="LA - LAN AIRLINES S.A.">
+<option value="LA1 - L.A.AVIATION">
+<option value="LAA - LIBYAN AIRLINES">
+<option value="LB - LLOYD AEREO BOLIVIANO S.A. (LA">
+<option value="LC - EQUATORIAL CONGO AIRLINES">
+<option value="LG - LUXAIR">
+<option value="LH - DEUTSCHE LUFTHANSA AG">
+<option value="LJ - SIERRA NATIONAL AIRLINES">
+<option value="LK - AIR LUXOR, S.A.">
+<option value="LLC - LITHUANIAN AIRLINES">
+<option value="LN - LIBYAN ARAB AIRLINES">
+<option value="LO - POLSKIE LINIE LOTNICZE LOT S.A">
+<option value="LP - LAN PERU S.A.">
+<option value="LQ - AIR GUINEA CARGO, S.A.">
+<option value="LR - LINEAS AEREAS COSTARRICENSES S">
+<option value="LS - JET2.COM">
+<option value="LTU - LTU INTERNATIONAL AIRWAYS">
+<option value="LV - ALBANIAN AIRLINES MAK S.H.P.K.">
+<option value="LX - SWISS INTERNATIONAL AIR LINES">
+<option value="LY - EL AL ISRAEL AIRLINES LTD.">
+<option value="LZ - BALKAN BULGARIAN AIRLINES">
+<option value="M1 - Mangesh 1 test - live">
+<option value="M2 - MHS AVIATION">
+<option value="M6 - ANGOLA AIRLINES">
+<option value="MA - MALEV HUNGARIAN AIRLINES LIMIT">
+<option value="MD - AIR MADAGASCAR">
+<option value="ME - MIDDLE EAST AIRLINES">
+<option value="MF - XIAMEN AIRLINES">
+<option value="MFS - MIXJET FLIGHT SUPPORT">
+<option value="MH - MALAYSIA AIRLINES">
+<option value="MI - SILKAIR (S) PTE. LTD.">
+<option value="MID - MIDA AIR">
+<option value="MJ - MIHIN LANKA">
+<option value="MK - AIR MAURITIUS">
+<option value="MKA - MKA CARGO">
+<option value="MMZ - EURO ATLANTIC AIRWAYS">
+<option value="MN - COMAIR LTD.">
+<option value="MP - MARTIN AIR">
+<option value="MS - EGYPTAIR">
+<option value="MU - CHINA EASTERN AIRLINES">
+<option value="MV - ARMENIAN INTERNATIONAL AIRWAYS">
+<option value="MX - COMPANIA MEXICANA DE AVIACION">
+<option value="N12 - RYAN INTERNATIONAL AIRLINES">
+<option value="N2 - SKYWARD AVIATION">
+<option value="N4 - NORDWIND AIRLINES">
+<option value="N9 - KABO AIR (SKYWARD AVIATION)">
+<option value="NCR - NATIONAL AIRLINES">
+<option value="NF - AIR VANUATU (OPERATIONS) LIMIT">
+<option value="NG - LAUDA AIR LUFTFAHRT AG">
+<option value="NH - ALL NIPPON AIRWAYS CO. LTD.">
+<option value="NI - PORTUGALIA - COMPANHIA PORTUGU">
+<option value="NJ - NET JETS">
+<option value="NL - SHAHEEN AIRLINES">
+<option value="NO - NEOS AIRLINES">
+<option value="NR - PAMIR AIRWAYS - CANX use PM">
+<option value="NT - BINTER CANARIAS">
+<option value="NW - NORTHWEST AIRLINES, INC.">
+<option value="NX - AIR MACAU COMPANY LIMITED">
+<option value="NZ - AIR NEW ZEALAND LIMITED">
+<option value="OA - OLYMPIC AIRLINES">
+<option value="OF - AIR FINLAND">
+<option value="OHA - ROYAL NEW ZEALAND AIR FORCE">
+<option value="OK - CZECH AIRLINES A.S., CSA">
+<option value="OM - MIAT - MONGOLIAN AIRLINES">
+<option value="ONE - ONE TIME FLIGHT-CASH">
+<option value="OR - TUIFLY NETHERLANDS">
+<option value="OR99 - ARKE FLY">
+<option value="OS - AUSTRIAN AIRLINES, OSTERREICHI">
+<option value="OU - CROATIA AIRLINES">
+<option value="OV - ESTONIAN AIR">
+<option value="OX - ORIENT THAI AIRLINES CO.LTD">
+<option value="OZ - ASIANA AIRLINES INC.">
+<option value="P1 - PACIFIC INFORMATION">
+<option value="P4 - AIR PEACE LIMITED">
+<option value="P7 - EASTLINE AIRWAYS">
+<option value="P9 - PERM AIRLINES">
+<option value="PA - AIR BLUE">
+<option value="PF - PRIMERA AIR">
+<option value="PFG - PRIVATE FLIGHT GLOBAL LTD">
+<option value="PG - BANGKOK AIRWAYS CO. LTD.">
+<option value="PH - POLYNESIAN LIMITED">
+<option value="PHG - PHOENIX FZE">
+<option value="PHW - AVE.COM">
+<option value="PJB - PALM JET FZC BAGHDAD">
+<option value="PK - PAKISTAN INTERNATIONAL AIRLINE">
+<option value="PM - PAMIR AIRLINES">
+<option value="PO - POLAR AIR CARGO">
+<option value="PP - JET AVIATION DUBAI LLC">
+<option value="PR - PHILIPPINE AIRLINES, INC.">
+<option value="PS - UKRAINE INTERNATIONAL AIRLINES">
+<option value="PTI - PRIVAT AIR">
+<option value="PU - PLUNA LINEAS AEREAS URUGUAYAS">
+<option value="PX - AIR NIUGINI PTY LIMITED">
+<option value="PY - SURINAM AIRWAYS LTD.">
+<option value="PZ - TAM - TRANSPORTES AEREOS DEL">
+<option value="Q3 - ZAMBIAN AIRWAYS">
+<option value="QAF - AMIRI FLIGHT - QATAR">
+<option value="QE - QATAR EXECUTIVE">
+<option value="QF - QANTAS AIRWAYS LTD.">
+<option value="QH - ALTYN AIR">
+<option value="QM - AIR MALAWI LIMITED">
+<option value="QO - AEROMEXPRESS S.A. DE C.V.">
+<option value="QR - QATAR AIRWAYS(Q.C.S.C)">
+<option value="QS - TRAVEL SERVICE AIRLINE">
+<option value="QU - AZUR AIR UKRAINE AIRLINES LLC">
+<option value="QY - EUROPEAN AIR TRANSPORT">
+<option value="R2 - ORENAIR">
+<option value="R4 - RUS AVIATION">
+<option value="R8 - KYRGYZSTAN AIRLINES">
+<option value="RA - NEPAL AIRLINES">
+<option value="RAB - AEROSPACE CONSORTIUM FZE">
+<option value="RAC - RUSSIAN AIR.COM">
+<option value="RAL - ROYAL AIRLINE">
+<option value="RAS - RIAL AVIATION SERVICES">
+<option value="RAV - RAM JET CO FZC">
+<option value="RB - SYRIAN ARAB AIRLINES">
+<option value="RG - ROTANA JET AVIATION LLC">
+<option value="RJ - ROYAL JORDANIAN">
+<option value="RL - ROYAL FLIGHT AIRLINES">
+<option value="RLU - AEROCREDO (RusLine)">
+<option value="RNF - ROYAL NETHERLANDS AIR FORCE">
+<option value="RNZ - ROYAL NEW ZEALAND AIR FORCE">
+<option value="RO - TAROM - TRANSPORTURILE AERIENE">
+<option value="ROJ - ROYAL JET">
+<option value="RQ - KAM AIR">
+<option value="RR - ROYAL AIR FORCE">
+<option value="RU - AIRBRIDGECARGO AIRLINES LLC">
+<option value="RV - CASPIAN AIRLINES SERVICE COMPA">
+<option value="RYN - RYAN INTERNATIONAL AIRLINES">
+<option value="S2 - SAHARA AIRLINES LIMITED">
+<option value="S5 - SMALL PLANET AIRLINES">
+<option value="S7 - SIBERIA AIRLINES">
+<option value="S9 - SILK ROAD CARGO LLC">
+<option value="SA - SOUTH AFRICAN AIRWAYS">
+<option value="SB - AIR CALEDONIE INTERNATIONAL">
+<option value="SC - SHANDONG AIRLINES">
+<option value="SD - SUDAN AIRWAYS CO. LTD.">
+<option value="SDM - STATE TRANSPORT CO.OF RUSSIA">
+<option value="SE - DAS AIR CARGO">
+<option value="SF - TASSILI AIRLINES">
+<option value="SG - SPICE JET">
+<option value="SIL - STARLING INTERNATIONAL LTD.">
+<option value="SK - SCANDINAVIAN AIRLINES SYSTEM">
+<option value="SKG - SKYGATE SERVICES FZE">
+<option value="SL - SEKO LOGISTICS (London) LTD">
+<option value="SLD - SILVER AIR">
+<option value="SM - SPECIAL MENU">
+<option value="SN - DELTA AIR TRANSPORT N.V.">
+<option value="SND - SKY TRADERS">
+<option value="SP - SATA - AIR ACORES">
+<option value="SPA - SAUDI PRIVATE AVIATION">
+<option value="SQ - SINGAPORE AIRLINES">
+<option value="SQC - SINGAPORE CARGO">
+<option value="SS - CORSAIR">
+<option value="SU - AEROFLOT RUSSIAN AIRLINES">
+<option value="SV - SAUDI ARABIAN AIRLINES">
+<option value="SW - AIR NAMIBIA">
+<option value="SYM - SYMPHONY MASTER LTD">
+<option value="SZ - SOMON AIR">
+<option value="T4 - HELLAS JET S.A.">
+<option value="T5 - TURKMENISTAN AIRLINES">
+<option value="T6 - TAVREY AIRCOMPANY">
+<option value="TA - TACA INTERNATIONAL AIRLINES, S">
+<option value="TAS - TRACK AVIATION SERVICES">
+<option value="TC - AIR TANZANIA COMPANY LTD.">
+<option value="TE - LITHUANIAN AIRLINES">
+<option value="TF - MALMO AVIATION">
+<option value="TG - THAI AIRWAYS INTERNATIONAL PUB">
+<option value="TK - TURKISH AIRLINES INC.">
+<option value="TL - TRANS-MEDITERRANEAN AIRWAYS">
+<option value="TLJ - THALAIR">
+<option value="TM - LAM - LINHAS AEREAS DE MOCAMBI">
+<option value="TN - AIR TAHITI NUI">
+<option value="TNE - TNT FOR EMIRATES">
+<option value="TP - TAP - AIR PORTUGAL">
+<option value="TU - TUNISAIR">
+<option value="TUP - NATIONAL AIR CARGO">
+<option value="U6 - URAL TRAVEL & TOURISM LLC">
+<option value="U8 - ARMAVIA">
+<option value="UA - UNITED AIRLINES, INC.">
+<option value="UAD - UNITED AIRLINES INC-DUBAI BRAN">
+<option value="UAS - UNITED AVIATION SVCS.">
+<option value="UAU - UNIVERSAL AVIATION UK LTD">
+<option value="UB - MYANMAR NATIONAL AIRLINES">
+<option value="UC - LAN CHILE CARGO S.A.">
+<option value="UL - SRILANKAN AIRLINES LIMITED">
+<option value="UM - AIR ZIMBABWE (PVT) LTD.">
+<option value="UN - TRANSAERO AIRLINES">
+<option value="UNA - UN AIRLINES">
+<option value="UNF - U.N.HUMANITARIAN SVCS">
+<option value="UR - UGANDA AIRLINES">
+<option value="US - US AIRWAYS, INC.">
+<option value="UT - UTAIR">
+<option value="UU - AIR AUSTRAL">
+<option value="UX - AIR EUROPA LINEAS AEREAS, S.A.">
+<option value="UY - SKY PRIME AVIATION SERVICES">
+<option value="V3 - CARPATAIR S.A.">
+<option value="V7 - AIR SENEGAL INTERNATIONAL">
+<option value="VA - VOLARE AIRLINES S.P.A.">
+<option value="VGF - VGF AIR">
+<option value="VH - AEROPOSTAL ALAS DE VENEZUELA C">
+<option value="VI - VOLGA-DNEPR AIRLINE JOINT STOC">
+<option value="VIP - VIP FLIGHT">
+<option value="VIR - VIRTUAL AIRLINES">
+<option value="VJT - VISTA JET LIMITED">
+<option value="VK - VIRGIN NIGERIA">
+<option value="VL - MED-VIEW AIRLINE">
+<option value="VN - VIETNAM AIRLINES">
+<option value="VP - VIACAO AEREA SAO PAULO, S.A. (">
+<option value="VS - VIRGIN ATLANTIC AIRWAYS LIMITE">
+<option value="VSO - VASO AIRLINES">
+<option value="VT - AIR TAHITI">
+<option value="VV - AEROSVIT AIRLINES">
+<option value="W3 - ARIK AIR">
+<option value="W5 - MAHAN AIRLINES">
+<option value="W8 - CARGOJET AIRWAYS LTD.">
+<option value="WA - WALLAN AVIATION">
+<option value="WB - RWANDAIR">
+<option value="WF - WIDEROE'S FLYVESELSKAP A.S.">
+<option value="WH - CHINA NORTHWEST AIRLINES">
+<option value="WK - EDELWEISS AIR">
+<option value="WX - CITYJET">
+<option value="WY - OMAN AVIATION SERVICES CO. (SA">
+<option value="X3 - TUIFLY GMBH">
+<option value="XF - VLADIVOSTOK AIR JSC">
+<option value="XH - ALEXANDRIA AIRLINES">
+<option value="XK - COMPAGNIE AERIENNE CORSE">
+<option value="XL - LAN ECUADOR - AEROLANE LINEAS">
+<option value="XRH - ROYAL AUSTRALIAN AIRFORCE">
+<option value="XRI - ROYAL AUSTRALIAN AIRFORCE">
+<option value="XU - AFRICAN EXPRESS">
+<option value="XX - MUDAN AIR">
+<option value="XXS - SKY PLAN EAST">
+<option value="XY - ALKHAYALA">
+<option value="Y2 - FLY GLOBESPAN">
+<option value="Y4 - EAGLE AVIATION">
+<option value="Y7 - SILVERJET">
+<option value="Y9 - KISH AIRLINES">
+<option value="YG - SOUTH AIRLINES">
+<option value="YW - AIR NOSTRUM L.A.M.S.A.">
+<option value="YY - AIRLINE FOR SPL MEAL FORECAST">
+<option value="Z5 - GMG AIRLINES">
+<option value="Z9 - AERO ZAMBIA">
+<option value="Z99 - ADD-HOC CASH FLIGHTS">
+<option value="ZB - MONARCH">
+<option value="ZC - ROYAL SWAZI NATIONAL AIRWAYS C">
+<option value="ZD - DOLPHIN AIR">
+<option value="ZE - LINEAS AEREAS AZTECA, S.A. DE">
+<option value="ZF - AZUR AIR LLC">
+<option value="ZH - SHENZHEN AIRLINES">
+<option value="ZL - HAZELTON AIRLINES DBA REGIONAL">
+<option value="ZT - TITAN AIRWAYS">
+<option value="ZU - HELIOS AIRWAYS">
+<option value="ZZ - AIRLINE FOR EKFC MENU">
+        </datalist>
+      </div>
+      <div>
+        <label for="flightNo">Flight No</label>
+        <input type="text" id="flightNo" name="flightNo" placeholder="Enter Flight No">
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <label for="requestedByERP">Requested By (ERP No)</label>
+        <input type="text" id="requestedByERP" name="requestedByERP" placeholder="Enter ERP No">
+      </div>
+      <div>
+        <label for="requestedByName">Requested By Name</label>
+        <input type="text" id="requestedByName" name="requestedByName" placeholder="Enter Name">
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <label for="reasonForRequest">Reason For Request</label>
+        <select id="reasonForRequest" name="reasonForRequest">
+          <option value="">-- Select --</option>
+          <option value="Aircraft Change">Aircraft Change</option>
+          <option value="Standard">Standard</option>
+          <option value="Other">Other</option>
+          <option value="Regular Request">Regular Request</option>
+          <option value="Increase">Increase</option>
+          <option value="Damaged">Damaged</option>
+          <option value="Short Item">Short Item</option>
+          <option value="Bulk to Float">Bulk to Float</option>
+          <option value="Bulk to Preset Store">Bulk to Preset Store</option>
+        </select>
+      </div>
+      <div>
+        <label for="approvedBy">Approved By</label>
+        <input type="text" id="approvedBy" name="approvedBy" placeholder="Enter Approver Name">
+      </div>
+    </div>
+<form id="requestForm">
+
+    <h2>Select Items</h2>  <!-- ✅ Add Item Button now inside the form -->
+  <button type="button" id="addItemBtn">➕ Add Item</button>
+
+    <div id="itemContainer"></div>
+    <label for="fileUpload">Upload File:</label>
+    <input type="file" id="fileUpload" name="fileUpload">
+    <div class="note-section">
+      <label for="note">Additional Note:</label>
+      <textarea id="note" name="note" placeholder="Enter any special instructions or notes here..." rows="4" cols="50"></textarea>
+    </div>
+    <div class="button-group">
+      <button type="reset">Reset</button>
+      <button type="submit">Submit</button>
+    </div>
+  </form>
+<script>
+const itemOptions = [
+  "R170014 - JUICE PINEAPPLE 1LT",
+  "R170133 - JUICE GRAPE TETRA PACK",
+  "R170087 - JUICE COCKTAIL 1LT",
+  "R170190 - JUICE CRANBERRY 1LT",
+  "R170936 - JUICE APPLE 180 ML (LACNOR)",
+
+  // Additional items
+  "PS5174 - MINERAL WATER 240ML 1x30",
+  "PS5175 - MINERAL WATER 500 ML 1X28",
+  "PS5178 - MINERAL WATER 1 LTR",
+  "PS5179 - MINERAL WATER 1.5LTR",
+  "PS5190 - PURE LIFE SPARKLING WATER 1LTR",
+  "PS5461 - J/C OIL & VINEGAR",
+  "PS5198 - MONTELLIER SPARKLING WATER 355ML",
+  "DG7016 - HARROGATE M.WATER 500ML",
+  "DG7061 - HARROGATE M.WATER 1.5LT 1X12",
+  "DG7064 - SPARKLING MINERAL WATER 1.5L",
+  "DG7049 - HARROGATE M.WATER 250ML1X30",
+  "DG5162 - ORGANIC VINAGRETTE 12ML",
+  "36302163 - CCL AMENITY KIT",
+  "36303041 - CCL AMENITY KIT",
+  "36303052 - CCL AMENITY KIT",
+  "36302167 - ECL AMENITY KIT",
+  "36302871 - ECL AMENITY KIT",
+  "36302978 - ECL AMENITY KIT",
+  "36302993 - ECL AMENITY KIT",
+  "36303055 - ECL AMENITY KIT",
+  "36303310 - ECL AMENITY KIT",
+  "9051200 - BABY FOOD APPLE",
+  "9051205 - BABY FOOD CARROT",
+  "9051105 - BALSAMIC VINEGAR OIL",
+  "9055403 - MILK PORTION",
+  "9053414 - CANTAL ESPELETTE PEPPER 20GM",
+  "9022012 - EVIAN WATER NUDE 400ML",
+  "9051115 - BALSA VINEGAR/ OLIVE OIL 20 ML J",
+  "9055402 - MILK PORTION 10GM",
+  "9047145 - LH BUSINESS SLIPPERS",
+  "26008 - SPA WATER 500 ML (1X24)",
+  "27753 - SPA WATER 1.5 LTR 1x6",
+  "KEB003191 - POLLACK SOUP",
+  "KEB004400 - AMENITY KIT",
+  "KEB005277 - HOT PEPPER PASTE TUBE TYPE, 20GM (2025)",
+  "KEB005278 - INSTANT STEAMED RICE, 180GM*36PK/CS (2025)",
+  "KEB005321 - IND.SESAME OIL (2025)",
+  "KEB005322 - MISO SOUP IND INSTANT, 4GM (2025)",
+  "KEB005209 - AMENITY KIT, EY (2025)",
+  "KEB005124 - SLIPPER, EY",
+  "KEB005249 - DENTALl SET WITH ECO PACK FOR FC/PR 2025",
+  "101841 - KEY TO PAD LOCK",
+  "104130 - HD BELGIAN CHOCOLATE 100ML",
+  "100263 - HD VANILLA 100ML",
+  "100267 - HD STRAWBERRIES & CREAM 100ML",
+  "100256 - Chocolate 75ml",
+  "102198 - HD STRAWBERRIES & CREAM 75ML",
+  "102518 - HD VANILLA 75ML",
+  "103027 - TAITTINGER NV CHAMPANGE",
+  "104269 - ASTORIA PROSECCO VALDOBBIADENE",
+  "104249 - Drappier Carte d’Or Brut Champagne",
+  "104392 - LAURENT PERRIER BRUT CHAMPAGNE 75CL",
+  "104307 - CHARLES HEIDSIECK CHAMPAGNE 75CL",
+  "768 - AMENITY KIT FOR BABYS",
+  "60002 - SMALL BACKPACK FOR KIDS",
+  "30023 - AMENITY KIT B/C",
+  "SQA4174F - FCL SLEEPER SUIT – Lalique Sage S",
+  "SQA4175F - FCL SLEEPER SUIT – Lalique Sage M",
+  "SQA4176F - FCL SLEEPER SUIT – Lalique Sage L",
+  "SQA4177F - FCL SLEEPER SUIT – Lalique Sage XL",
+  "SQA4150B - FCL SLIPPER LARGE (LALIQUE)",
+  "SQA4151B - FCL SLIPPER STANDARD (LALIQUE)",
+  "SQA4152A - FCL TUBE SOCKS (BLACK)",
+  "SQA4157B - FCL EYESHADE (BLACK) LALIQUE",
+  "SQA4160C - JCL SLIPPERS STD PEPPERCORN COLOUR -65%",
+  "SQA4161C - JCL SLIPPER LARGE PEPPERCORN COLOUR -35%",
+  "SQA4162A - JCL SOCKS",
+  "SQA4158A - JCL EYE SHADE",
+
+  // Newly added items
+  "1001 - Pepsi 300mL",
+  "1002 - 7 Up 300mL",
+  "1003 - Pepsi Light 300mL",
+  "1004 - Mirinda 300mL",
+  "1005 - Evervess Ginger Ale 155ml",
+  "1006 - Mountain Dew 300ml",
+  "1012 - Orange Juice Tetra Pack",
+  "1013 - Apple Juice Tetra Pack",
+  "1014 - 7 Up 155mL",
+  "1017 - 7 up Diet 155ml",
+  "1019 - Evervess Tonic 155mL",
+  "1021 - Evervess Soda 155mL",
+  "1022 - Tomato Juice Tetra Pack",
+  "1023 - Al Ain Water 500ml",
+  "1024 - Pepsi 155mL",
+  "1025 - Pepsi Diet 155mL",
+  "1208 - Ispirazione Firenze Arpeggio",
+  "1209 - Volluto",
+  "1210 - Ispirazione Firenze Arpeggio Decaffeinato",
+  "1214 - Forte",
+  "1215 - Ristretto",
+  "1216 - Decaffeinato",
+  "1217 - Exceptional Sachet Chamomile",
+  "1218 - Exceptional Sachet Green Tea",
+  "1219 - Exceptional Sachet Earl Grey",
+  "1221 - Exceptional Sachet Ceylon Tea",
+  "1222 - Dilmah Tea Bags Large",
+  "1407 - Jack Daniels Miniature",
+  "1408 - Belvedere 5Cl",
+  "1409 - Chivas Regal Miniature",
+  "1413 - Mini Moet 20cl",
+  "1414 - Bira Moretti",
+  "1415 - BrewDog IPA 33cl",
+  "1416 - Bacardi White Rum 5cl",
+  "1421 - Carlsberg",
+  "1422 - Stella Artois",
+  "1423 - Beefeater Gin Pet",
+  "1428 - Johnnie Walker Black Label 5 CL",
+  "1429 - Corona Beer",
+  "1433 - Bailey's Irish Cream Minis",
+  "1435 - Bombay Sapphire Gin 5 Cl",
+  "1437 - Passori Rosso Veneto IGT",
+  "1439 - Asahi 33cl",
+  "1445 - Martell VSOP",
+  "1446 - Galianni Chardonnay 187ml",
+  "1447 - Galianni Merlot 187ml",
+  "1448 - Bottega Gold Prosecco",
+  "1455 - Budweiser",
+  "1459 - Woodford Reserve Bourbon",
+  "1460 - Bitter Campari",
+  "1469 - Glen Moray 12YO 5 CL",
+  "1472 - Stoli Premium Mini",
+  "1474 - Pommery Brut Royal 37.7CL",
+  "1477 - Julien Schall South Coast Sauvignon Blanc",
+  "1603 - Kit Kat Chunky",
+  "1605 - Galaxy Milk 36g",
+  "1606 - Mars Chocolate 51gm",
+  "1628 - Chocolate Les Gavottes",
+  "1635 - Cioccolatini Gianduitto",
+  "1636 - Biscotti Canestrello",
+  "1637 - Cup Noodles Chicken",
+  "1638 - Cup Noodles Veg",
+  "1641 - Loacker Milk",
+  "1644 - Potato Ridges Sea Salt Hunters 20gm",
+  "1648 - Al Rifai Classic Mix 35gm",
+  "1649 - Mezete Hummus Dip&GO",
+  "1651 - Hunter Potato Chips Can Sea Salt",
+  "1653 - Hunter Potato Chips Can Sweet Chili",
+  "1654 - Cocktail Mix 50gm",
+  "2505 - ECONOMY CLASS BOB MENU MAX",
+  "2508 - Pouch for vPOS Device",
+  "2511 - Do Not Remove Tag",
+  "6001 - Sugar Sticks",
+  "6003 - Nestle Coffee Mate Sticks",
+  "6004 - Nescafe Gold Blend Sachet 17g",
+  "6007 - Stirrers",
+  "6008 - Cocktail Napkin J Class",
+  "6011 - Thermal Roll 57 x 30 with Core",
+  "6014 - Bar Seals White flydubai",
+  "6015 - Plastic Cup - 9 oz PET",
+  "6019 - Cutlery Pack (6 x 1) Economy",
+  "6026 - Techniice",
+  "6027 - Bar Seals Green flydubai",
+  "6028 - Hot Cup Corrugated 8Oz",
+  "6029 - Lid for Hot Cup Corrugated 8Oz",
+  "6030 - Garbage Bag LDPE Clear",
+  "6031 - Food Storage Bag",
+  "6037 - flydubai Carry Bag Orange",
+  "6038 - Paper Cup Holder",
+  "6040 - Condiment Pack 4 in 1",
+  "6502 - Nestle Red Mug 1.8gm",
+  "6504 - Dilmah English Breakfast Tea",
+  "6505 - Al Ain Water 1.5 ltr",
+  "6506 - White Oxo biodegradable bag",
+  "6602 - Al Ain Water Cuplets",
+  "6604 - Al Ain Water 200ml",
+  "6605 - Milk Long Life UHT Full Fat",
+  "6606 - Half Straw J Class",
+  "6608 - J Cloth Blue-JC",
+  "6612 - Cocktail Napkins Y Class",
+  "6613 - Hot & Cold Towel - J Class",
+  "6615 - Dressing Balsamic Olive Oil Vinaigrette",
+  "6616 - Sugar Sachet - Brown 5gm",
+  "6617 - Al Ain Water 330ml",
+  "6618 - Honey Jar Portion 28gm",
+  "6621 - Disruption Box 2018_CS",
+  "6622 - Wet Refreshing Towel",
+  "6623 - Al Ain Sparkling Water 330ml",
+  "6625 - Wooden Cutlery Pack",
+  "6627 - Salt Sachet EY",
+  "6628 - Pepper Sachet EY",
+  "6629 - Folded Napkins EY",
+  "6632 - Wooden Spoon With Napkin",
+  "6633 - Canderel Sachet",
+  "6701 - Air Sickness Bags",
+  "6706 - Gloves",
+  "6707 - Toilet Rolls - 500 sheet pulp",
+  "6708 - Hand Towels",
+  "6709 - Facial Tissues",
+  "6711 - Waste Bag - Roll",
+  "6713 - Callington Aerosafe Sprays",
+  "6714 - N95 Mask",
+  "6715 - Blanket 38*60 Small",
+  "6718 - Callington 3 in 1 Fresh & Clean",
+  "6719 - Nitrile Gloves Powder Free Blue",
+  "6720 - Ziplock Bag 6.8\" x 9.6\"",
+  "6722 - Ear Plug",
+  "6723 - Sanitizing Spray Noviruclean",
+  "6724 - Prespray 100gm",
+  "6726 - Fresh & Clean Deo Disk",
+  "6727 - Novogel AB Sanitizer Callington",
+  "6728 - Foaming Soap Callington",
+  "6729 - Anti Bacterial Wipe",
+  "6731 - Nitrile Gloves Powder Free Black",
+  "6738 - Cutlery Envelope Economy",
+  "6740 - Dental Kit",
+  "6901 - Plastic Seals Yellow Envopak",
+  "6902 - Plastic Seals White Envopak",
+  "6903 - Tenor Body Envopak",
+  "6904 - Emerg. Cleaning Kit Callington",
+  "6905 - Seal Plastic Red Unserviceable",
+  "8001 - Stereo Headset - Neodynium"
+    ];
+
+// Add more items multiple times
+itemOptions.push(
+  "R171001 - JUICE MANGO 1LT",
+  "R171002 - JUICE STRAWBERRY 1LT",
+  "R171003 - WATER BOTTLE 1.5LT",
+
+  // Milk Products
+  "R060016-MILK FRESH FULL CREAM 250ML",
+  "R060047-MILK FRESH FULL CREAM 200ML",
+  "R060024-MILK FRESH FULL CREAM 1LTR",
+  "R060017-MILK FRESH FULL CREAM 500ML",
+  "R060042-MILK FRESH LOW FAT 500ML",
+  "R061182-MILK SKIMMED FRESH 1L",
+  "R060046-MILK FRESH LOW FAT 200ML",
+  "R060014-MILK LONG LIFE UHT HALF CREAM",
+  "R060026-MILK LONG LIFE UHT FULL CREAM",
+
+  // Juices & Soft Drinks
+  "R171421-JUICE ORANGE 500 ML FLASH PASTEURIZED",
+  "R171419-JUICE ORANGE 1 LTR FLASH PASTEURIZED",
+  "R170020-SOFT DRINKS COCA-COLA 300ML",
+  "R170386-SOFT DRINKS COCA-COLA 500ML",
+  "R170491-SOFT DRNK COCA-COLA LGHT 300ML",
+  "R170419-SOFTDRINKS COCA COLA ZERO300ML",
+  "R170585-SOFT DRINK COCA COLA ZERO 500M",
+  "R170097-SOFT DRINK SPRITE 300ML",
+  "R170388-SOFT DRINKS SPRITE 500 ML",
+  "R170429-SOFT DRINKS SODA 300 ML",
+  "R170468-SOFT DRINKS GINGER ALE 300 ML",
+  "R170469-SOFT DRINKS TONIC 300 ML",
+  "R170064-SOFT DRINK FANTA ORANGE 300ML",
+  "R170046-SOFT DRINK PEPSI 300ML",
+  "R170012-SOFT DRINKS PEPSI-LIGHT 300ML",
+  "R170048-SOFT DRINK 7UP 300ML",
+  "R170015-SOFT DRINK 7UP LIGHT 300ML",
+  "R171092-BRITVIC BITTER LEMON DRINK 300ML",
+  "R170077-ICE TEA PEACH",
+  "R170078-ICE TEA LEMON",
+  "R170047-SOFT DRINK MIRINDA 300ML",
+  "R170403-JUICE ORANGE FLOAT 180ML",
+  "R170038-SOFT DRINKS ENERGY RED BULL",
+
+  // Waters
+  "R171413-SAN PELLEGRINO SPARKLING WATER 250ML",
+  "R170202-SPARKLING WATER PLN OASIS 1LTR",
+  "R170578-SPARKLING WATER OASIS 500 ML",
+  "R170229-MINERAL WATER VOLVIC 1.5LT",
+  "R170230-MINERAL WATER VOLVIC 500ML",
+  "R170604-MINERAL WATER VOLVIC 330 ML",
+  "R170847-MINERAL WATER FIJI 1 LT",
+  "R170888-MINERAL WATER FIJI 330 ML",
+  "R170848-MINERAL WATER FIJI 500 ML",
+  "R170241-MINERAL WATER EVIAN 330ML",
+  "R170105-MINERAL WATER EVIAN 500ML",
+  "R170104-MINERAL WATER EVIAN 1.5 LT",
+  "R170400-WATER EVIAN GLASS BOTTLE 330ML",
+  "R170284-MINERAL WATER 500ML",
+  "R170619-AL AIN  WATER 200ML",
+  "R170178-MINERAL WATER MASAFI 500 ML",
+  "R170069-MINERAL WATER EMIRATES 1.5 LT",
+  "R170084-MINERAL WATER EMIRATES 330 ML",
+  "R170473-WATER GLASS STILL VOSS 375 ML",
+  "R170474-WATER SPARKLING VOSS 375 ML",
+  "R170099-WATER CUPLET 100ML",
+  "R170119-SPARK WATER PERRIER 330ML",
+  "R170125-PERRIER 750ML",
+
+  // More Juices
+  "R170025-JUICE APPLE TETRAPACK 1LT",
+  "R170030-JUICE TOMATO 1LT",
+  "R170031-JUICE ORANGE TETRA PACK 1LT",
+  "R170032-JUICE MANGO 1LT TETRA PACK",
+  "R170014-JUICE PINEAPPLE 1LT",
+  "R170133-JUICE GRAPE TETRA PACK",
+  "R170087-JUICE COCKTAIL 1LT",
+  "R170190-JUICE CRANBERRY 1LT",
+  "R170936-JUICE APPLE 180 ML  (LACNOR)",
+  "R170935-JUICE ORANGE 180 ML (LACNOR)",
+
+  // Specialty Milks
+  "R060805-MILK ALMOND ORGANIC",
+  "R060847-MILK LONG LIFE LACTOSE FREE 1 LTR",
+  "R060184-MILK SOYA UHT",
+
+  // Spreads
+  "R100124-JAM STRAWBERRY JAR 28 GM",
+  "R100122-JAM APRICOT JAR PORTION 28 GM",
+  "R100126-JAM ORANGE MARMALADE JAR 28GM",
+  "R100125-HONEY JAR PORTION 28 GM",
+  "R100119-JAM STRAWBERRY PORTION 20GM",
+  "R100971-JAM ORANGE MARMALADE PORTION 25 GM APRIL",
+  "R100970-JAM APRICOT PORTION 25 GM APRIL",
+  "R100121-HONEY PORTION  20GM",
+
+  // Tea & Coffee
+  "R170008-TEA BAGS ENGLISH BREAKFAST",
+  "R170109-TEA BAGS GREEN ENVELOPED",
+  "R170824-TEA TALE OF GREY EARL 2 GM",
+  "R170142-COFFEE INSTANT NESCAFE 50GM",
+  "R171210-COFFEE NESCAFE GOLD BLEND 95 G",
+  "R100015-COFFEE MATE SACHETS",
+  "R100101-CANDEREL SACHETS  SWEET & LOW",
+
+  // Sweeteners
+  "R080378-SUGAR WHITE STICK 4 GM",
+  "R080379-SUGAR BROWN STICK 4 GM",
+
+  // Chocolates & Snacks
+  "R120286-PATCHI CHOCOLATE 500GM",
+  "R120228-CHOCOLATE PATCHI 250 GM",
+  "R120971-NATURAL DATE BAR CACAO 30 GM",
+  "R121403-BREAK RIZZO CRUNCHY WAFER 17GM",
+  "R121336-CHOCOLATE GALAXY FLUTES 22.5GM",
+  "R120038-CHOCOLATE BOUNTY MINI",
+  "R120057-CHOCOLATE MARS",
+  "R121686-CHOCOLATE KIT KAT 20.7 GM",
+  "R120015-CHOCOLATE TWIX TWIN 50 GM",
+  "R130231-DARK CHOCOLATE 5 GMS 70 % LINDT",
+
+  // Condiments
+  "R100892-SAUCE WORCESTERSHIRE 290ML",
+  "R100006-TABASCO SAUCE FOR AIRLINE",
+
+  // Baby & Snack Foods
+  "R121002-BABY FOOD RICE AND CHICKEN 120 GM",
+  "R121013-GRANOLA BAR NUTTY MAPLE",
+  "R121500-CHIPS POTATO SEA SALT 12GM"
+);
+
+  // Continue adding new items
+  itemOptions.push(
+    "R121385-BRIT TIME PASS BISCUITS 40GM",
+    "R120068-BISCUIT DIGESTIVE",
+    "R150855-BAKED PRETZOS WITH SEA SALT 80GM",
+    "R121520-PRETZEL SNACKS 20GM",
+    "R160093-SWEET COCKTAIL DRY FRUITS 20GM",
+    "R160260-CASHEW ROAST DRY SALTED 20GM",
+    "R160259-ALMOND ROAST DRY SALTED 20GM",
+    "R120108-FROSTIES PORTION",
+    "R120476-KELLOGGS SPECIAL CLASSICS 30GM",
+    "R120014-CORN FLAKES  PORTION 24 GM",
+    "R120050-RICE KRISPIES PORTION",
+    "R120930-ALL BRAN ORIGINAL PORTION 45GM",
+    "R170035-COFFEE NESCAFE CLASSIC SACHET",
+    "R171231-INSTANT COFFEE SACHETS DECAF COFFEE PLANET",
+    "R170022-COFFEE PILLOW",
+    "R170045-TEA BAGS REGULAR",
+    "R100301-CREAMER SACHET VEGAN 3 GM",
+    "R171344-CAFFE SCARLATTO PURE 2GM",
+    "R121154-ORGANIC DRIED MANGOES 20 GM",
+    "R100486-PICKLE MANGO POT 25GM",
+    "R100017-MILK PORTION 10-ML UHT",
+    "R100034-TOMATO KETCHUP PORTION",
+    "R100018-CONDIMENT BAGS (1x500)",
+    "R100127-SALT PORTION WITHOUT LOGO",
+    "R100128-PEPPER PORTION W/OUT LOGO.035G",
+    "R100178-BALSAMIC OLIVE OIL VINAIGRETTE",
+    "R120748-CHIPS IRISH ATLANTIC LIGHTLY SALTED 25 GM",
+    "R122007-BEEF JERKY ORIGINAL 25GM",
+    "R100284-HEINZ TOMATO KETCHUP JAR",
+    "R100915-MUSTARD DIJON JAR 25GM",
+    "R061302-MAYONNAISE 33GM JAR",
+    "R120557-BISCUIT WALKERS SHORT BREAD",
+    "R120203-BISCUIT CRAWFORD MINI PACK",
+    "R120944-BABY FOOD APPLE 70GM",
+    "R120989-BABY FOOD ORGANIC 130G",
+    "R120419-BISCUIT CRACKER JACOB",
+    "R120530-CHIVE CRACKERS FOR CHEESE 15GM",
+    "R160051-RAISINS BONDED",
+    "R070111-NOODLE CHICKEN INDOMIE BRAND",
+    "R070112-NOODLE VEGETABLE INDOMIE BRAND",
+    "R160346-DATES SEEDLESS INDIVIDUAL",
+    "R060609-YOGHURT ASST KILLOWEN 140GM",
+    "R060838-YOGHURT PLAIN KILLOWEN 120GM",
+    "R060082-CHEESE PORTION PROCESSED 15gm",
+    "R020050-CAVIAR BELUGA 125GM",
+    "R020074-CAVIAR BELUGA 50 GM",
+    "R020092-CAVIAR BELUGA 30 GM",
+    "R020281-CAVIAR OSCIETRE 50 GMS",
+    "R020027-SALMON ROE",
+    "R020527-CAVIAR OSSETRA 30 GM",
+    "R020648-CAVIAR TIN BAERII IR 50GM",
+    "P100023-INSECTICIDE AEROSOL SPRAY 150 GM",
+    "P100103-AIRCRAFT INSECTICIDE PRE-SPRA 100 GM",
+    "P100022-INSECTICIDE AEROSAFE SPRAY 48GM",
+    "P010399-DETTOL WIPES 10 COUNTS",
+    "P010230-DETTOL LIQUID 250ML",
+    "P010185-SOAP LIQUID-HAND",
+    "P100008-TOILET SOAP MINI CROWN",
+    "P120133-WOODEN STIRRER",
+    "P010327-AIR FRESHENER AEROSOL 145 GM",
+    "P010228-TOWEL COTTON SCENTED",
+    "P090023-TISSUE FACIAL 2PLY WHITE BOX",
+    "P090024-PAPER ROLL TOILET WHITE 125SHT",
+    "P090025-KITCHEN TOWEL ROLL KLEENEX",
+    "P090031-PAPER TOWEL WHITE 2PLY23X30",
+    "P100030-PAPER NAPKIN W/OUT LOGO 1PLY",
+    "P090041-PAPER CUP WITH LID RIPPLE",
+    "P120015-PLASTIC GLASS CLEAR 8OZ",
+    "P120066-FOAM CUPS 6 OZ",
+    "P090324-ST PLA KRAFT CUP 8 OZ DOUBLE WALL",
+    "P120047-COMPACT SEALS",
+    "P120067-SWIZZLE STICK",
+    "P090302-DEEP PAPER FIBRE PLATE",
+    "P120101-STRAW FLEXIBLE IND/WRAPPED",
+    "P130010-SICKNESS BAG-AIR",
+    "P100073-VINLY GLOVES  POWDER FREE LARGE",
+    "P100077-VINLY GLOVES  POWDER FREE MEDIUM",
+    "P010138-CLOTH STARLET",
+    "P090009-PAPER CUP WITH HANDLE",
+    "P090021-HEAD REST COVER",
+    "P090053-TOILET SEAT COVER-DISPOSABLE",
+    "P100009-GLOVES CLEAR",
+    "P040122-PAPER BOX W/O WINDOW",
+    "P050025-WRAPPING CLING FILM 20 X 20CM",
+    "P050005-WRAPPING ROLL 15X15X500",
+    "P040101-RAMADAN KAREEM BOX SMALL",
+    "P040102-RAMADAN KAREEM BOX BIG",
+    "P040003-COOLER BOX 25 KG BIG",
+    "P040004-COOLER BOX  8 KG SMALL",
+    "P120402-WHITE SALAD BOWL WITH LID",
+    "P090022-TISSUE REFRESHING WET",
+    "P040631-COOLER BOX  5 KG SMALL",
+    "P110014-PLASTIC LUNCH BOX 4-COMPARTMENT",
+    "P040012-PLASTIC LUNCH BOX 258X203X50",
+    "P120003-PLASTIC SNACK BOX-G-270X135X54",
+    "P120007-PLASTIC TEA CUP WHITE-150CC",
+    "P120037-CUTLERY PACK 1X5",
+    "P120052-PLASTIC SALAD BOWL90X74X31",
+    "P120138-CUTLERY PACK 1X8",
+    "P120265-BLACK ROUND MICROWAVE 160 OZ"
+  );
+
+  // Add new items to the existing itemOptions array
+  itemOptions.push(
+    "P120100-PLASTIC BOWL BLACK W/LID TRANS ( RO32)",
+    "P130007-CUTLERY BAG 3\" X 8\"  205X82MM",
+    "P010358-NUDE FLASK",
+    "P110130-ALUMINIUM CAP FOR 350 ML FLASK",
+    "P010359-FRAGRANCE FLASK 150 ML",
+    "P110131-ALUMINIUM CAP FOR BOTTLE",
+    "P010360-BOKO 80 ML",
+    "P010362-BOKO 6 RUBBER SEAL",
+    "P010363-STAINLESS STEEL CLIP",
+    "P010364-SELECTISS COTTON TOWEL",
+    "P120250-SPICE CUBE",
+    "P010368-BOKO 60 GLASS LID",
+    "P090148-ISOTHERM BAG HANDLE",
+    "P100068-PUSHCLEAN BUTTON TOWELET",
+    "P110129-CAP FOR OLIVE BOTTLE",
+    "P120240-OLIVE BOTTLE 25 ML",
+    "P120153-MICROWAVE CONTAINER BLACK RECT",
+    "P120155-MICROWAVE CONTAINER BLACK",
+    "P120157-BLACK RECT. DELI CONTAINER",
+    "P120200-ATLAS TRAY2/3 TRASPARENT GREEN",
+    "P120201-LID FOR ATLAS TRAY 2/3",
+    "P120205-GLAZZ HALF SIZE ATLAS TRAY",
+    "P120206-LID FOR HALF SIZE GLAZZ",
+    "P120207-GLAZZ FULL TRAY ATLAS",
+    "P120208-GLAZZ LID FOR FULL SIZE ATLAS",
+    "P120209-GLAZZ MINI SALADIER DIA",
+    "P120210-GLAZZ DOME LID FOR MINI",
+    "P120241-QUARTZ PLATE TRANSPARENT GREEN",
+    "P120242-LID FOR QUARTZ PLATE",
+    "P120243-QUARTZ PLATE TRANSPARENT GREEN",
+    "P120244-STRAIGHT LID FOR QUARTZ PLATE",
+    "P120248-SEA GREEN CUBIK PLATE 65 X 130",
+    "P120249-CUBIK 65 X 130 LID",
+    "P010151-THERMO FLASK S/STEEL HANDY POT",
+    "P120252-TUBE WITH WHITE AQUA 6/1 KNIFE",
+    "P090149-NATURAL CABAS ZEBRA240X175X220",
+    "P080032-RAMEKIN DISH HEIGHT 4 CM",
+    "P010370-BAMBOO BASKET SMALL",
+    "P010241-BAMBOO BASKET MEDIUM",
+    "P010242-BAMBOO BASKET LARGE",
+    "P090252-GOLD LINER 35.3 X 26.2 CM FOR GLASS",
+    "P090253-BLACK LINER 35.3 X 26.2 CM FOR GLASS",
+    "P090254-GOLD LINER 25.7 X 23 CM FOR GLASS 2/3",
+    "P090255-BLACK LINER 25.7 X 23 CM FOR GLASS 2/3",
+    "P090256-GOLD LINER 25.3 X 16.9 CM FOR GLASS 1/2",
+    "P090257-BLACK LINER 25.3 X 16.9 CM FOR GLASS 1/2",
+    "P090291-GOLD BAND LARGE 87 X 4 CM LARGE",
+    "P090292-BLACK BAND LARGE 87 X 4 CM LARGE",
+    "P090264-GOLD BAND LARGE VIP 65.3 X 4 CM",
+    "P090265-BLACK BAND LARGE VIP 65.3 X 4 CM",
+    "P070275-Label Haute Cuisine Large 50x50 mm",
+    "P070276-Label Haute Cuisine Large 50x50 mm",
+    "P070277-Label Haute Cuisine Large50x50 mm",
+    "P090258-GOLD LINER 16.3 X10.8 CM FOR",
+    "P090259-BLACK LINER 16.3 X10.8 CM FOR",
+    "P090260-GOLD LINER 11.2 X 11.2 CM",
+    "P090261-BLACK LINER 11.2 X 11.2 CM",
+    "P090266-GOLD BAND MEDIUM VIP 34.7 X 3 CM",
+    "P090267-BLACK BAND MEDIUM VIP 34.7 X 3 CM",
+    "P070272-Label Haute Cuisine Small 36x36 mm",
+    "P070273-Label Haute Cuisine Small 36x36 mm",
+    "P070274-Label Haute Cuisine Small 36x36 mm",
+    "P090262-GOLD LINER 4.9 X 11.4 CM FOR CUBIC",
+    "P090263-BLACK LINER 4.9 X 11.4 CM FOR CUBIC",
+    "P090268-GOLD BAND SMALL VIP20 X 3 CM",
+    "P090269-BLACK BAND SMALL VIP 20 X 3 CM",
+    "P010413-CRYSTAL GLASS TUMBLER",
+    "P070359-D-LABELS W SECURITY CUTS WHITE",
+    "P070360-D-LABELS W SECURITY CUTS RED",
+    "P070361-D-LABELS W SECURITY CUTS BLUE",
+    "P070362-D-LABELS W SECURITY CUTS GREEN",
+    "P070363-D-LABELS W SECURITY CUTS BROWN",
+    "P070364-D-LABELS W SECURITY CUTS BLACK",
+    "P070365-D-LABELS WSECURITY CUTS YELLOW",
+    "P070366-LABELS PEELABLE PET MATTE FINISH SUNDAY",
+    "P070367-LABELS PEELABLE PET MATTE FINISH MONDAY",
+    "P070368-LABELS PEELABLE PET MATTE FINISH TUESDAY",
+    "P070369-LABELS PEELABLE WEDNESDAY",
+    "P070370-LABELS PEELABLE PET MATTE FINISH THURSDAY",
+    "P070371-LABELS PEELABLE PET MATTE FINISH FRIDAY",
+    "P070372-LABELS PEELABLE PET MATTE FINISH SATURDAY",
+    "R060025-YOGHURT FRUIT 100GM",
+    "R060021-YOGHURT FRUIT 70GM",
+    "R060011-YOGHURT PLAIN 100ML",
+    "R060753-YOGURT BALADE LOW FAT ASST 100 GM",
+    "R060782-YOGURT BALADE PLAIN 100GM",
+    "R061138-YOGHURT SOYA BALADE 100GM ASST",
+    "R061137-YOGHURT SOYA BALADE 100G PLAIN",
+    "R171425-JUICE CARROT 500 ML FLASH PASTEURIZED",
+    "R171443-DETOX CARROT AND APPLE 500 ML",
+    "R171424-JUICE GREEN APPLE 500 ML FLASH PASTEURIZED",
+    "R171417-JUICE MANGO 200 ML FLASH PASTEURIZED",
+    "R171420-JUICE ORANGE 200 ML FLASH PASTEURIZED",
+    "R170452-JUICE PINEAPPLE PASTEURIZED 1 LTR",
+    "R170448-JUICE MANGO PASTEURIZED FRESH 1 LTR",
+    "R171426-JUICE LEMON MINT 500 ML FLASH PASTEURIZED",
+    "R171418-JUICE PINEAPPLE 500 ML FLASH PASTEURIZED",
+    "R171457-SMOOTHIE STRAWBERRY 200 ML HPP",
+    "R060074-CHEESE BEL PAESE 25 GM PORTION",
+    "R060087-CHEESE CAMEMBERT PORTION",
+    "R060094-CHEESE BABYBEL MINI",
+    "R060754-BUTTER PORTION UNSALTED 8 GM",
+    "R060714-BUTTER PORTION 25GM SALTED",
+    "R060554-BUTTER PORTION 25 GM UNSALTED",
+    "R060291-BUTTER PORTION 10GM UNSALTED",
+    "R060355-MARGARINE BEBOLIGHT10G PORTION",
+    "R060465-CHEESE MILD CHEDDAR 20 GM",
+    "R120607-SHORTBREAD DARK CHOCOCHIP 2EA",
+    "R151460-MARBLE CAKE VEGAN 65GM",
+    "R121553-COOKIES VEGAN COCONUT MADELINE-12 GM FLOW WRAP",
+    "R050129-FRUIT BITES CRUNCHY APPLE 50GM",
+    "R170190-JUICE CRANBERRY",
+    "R170032-JUICE MANGO",
+    "R170014-JUICE PINEAPPLE 1LT",
+    "R170133-JUICE GRAPE TETRA PACK",
+    "R170087-JUICE COCKTAIL 1LT",
+    "R170190-JUICE CRANBERRY 1LT",
+    "R170936-JUICE APPLE 180 ML  (LACNOR)",
+    "R170935-JUICE ORANGE 180 ML (LACNOR)",
+    "R060805-MILK ALMOND ORGANIC",
+    "R060847-MILK LONG LIFE LACTOSE FREE 1 LTR",
+    "R060184-MILK SOYA UHT",
+    "R100124-JAM STRAWBERRY JAR 28 GM",
+    "R100122-JAM APRICOT JAR PORTION 28 GM",
+    "R100126-JAM ORANGE MARMALADE JAR 28GM",
+    "R100125-HONEY JAR PORTION 28 GM",
+    "R100119-JAM STRAWBERRY PORTION 20GM",
+    "R100971-JAM ORANGE MARMALADE PORTION 25 GM APRIL",
+    "R100970-JAM APRICOT PORTION 25 GM APRIL",
+    "R100121-HONEY PORTION  20GM",
+    "R170008-TEA BAGS ENGLISH BREAKFAST",
+    "R170109-TEA BAGS GREEN ENVELOPED",
+    "R170824-TEA TALE OF GREY EARL 2 GM",
+    "R170142-COFFEE INSTANT NESCAFE 50GM",
+    "R171210-COFFEE NESCAFE GOLD BLEND 95 G",
+    "R100015-COFFEE MATE SACHETS",
+    "R100101-CANDEREL SACHETS  SWEET & LOW",
+    "R080378-SUGAR WHITE STICK 4 GM",
+    "R080379-SUGAR BROWN STICK 4 GM",
+    "R120286-PATCHI CHOCOLATE 500GM",
+    "R120228-CHOCOLATE PATCHI 250 GM",
+    "R120971-NATURAL DATE BAR CACAO 30 GM",
+    "R121403-BREAK RIZZO CRUNCHY WAFER 17GM",
+    "R121336-CHOCOLATE GALAXY FLUTES 22.5GM",
+    "R120038-CHOCOLATE BOUNTY MINI",
+    "R120057-CHOCOLATE MARS",
+    "R121686-CHOCOLATE KIT KAT 20.7 GM",
+    "R120015-CHOCOLATE TWIX TWIN 50 GM",
+    "R130231-DARK CHOCOLATE 5 GMS 70 % LINDT",
+    "R100892-SAUCE WORCESTERSHIRE 290ML",
+    "R100006-TABASCO SAUCE FOR AIRLINE",
+    "R121002-BABY FOOD RICE AND CHICKEN 120 GM",
+    "R121013-GRANOLA BAR NUTTY MAPLE",
+    "R121500-CHIPS POTATO SEA SALT 12GM",
+  "P090053-TOILET SEAT COVER-DISPOSABLE",
+  "P100009-GLOVES CLEAR",
+  "P040122-PAPER BOX W/O WINDOW",
+  "P050025-WRAPPING CLING FILM 20 X 20CM",
+  "P050005-WRAPPING ROLL 15X15X500",
+  "P040101-RAMADAN KAREEM BOX SMALL",
+  "P040102-RAMADAN KAREEM BOX BIG",
+  "P040003-COOLER BOX 25 KG BIG",
+  "P040004-COOLER BOX  8 KG SMALL",
+  "P120402-WHITE SALAD BOWL WITH LID",
+  "P090022-TISSUE REFRESHING WET",
+  "P040631-COOLER BOX  5 KG SMALL",
+  "P110014-PLASTIC LUNCH BOX 4-COMPARTMENT",
+  "P040012-PLASTIC LUNCH BOX 258X203X50",
+  "P120003-PLASTIC SNACK BOX-G-270X135X54",
+  "P120007-PLASTIC TEA CUP WHITE-150CC",
+  "P120037-CUTLERY PACK 1X5",
+  "P120052-PLASTIC SALAD BOWL90X74X31",
+  "P120138-CUTLERY PACK 1X8",
+  "P120265-BLACK ROUND MICROWAVE 160 OZ",
+  "P120100-PLASTIC BOWL BLACK W/LID TRANS ( RO32)",
+  "P130007-CUTLERY BAG 3\" X 8\"  205X82MM",
+  "P010358-NUDE FLASK",
+  "P110130-ALUMINIUM CAP FOR 350 ML FLASK",
+  "P010359-FRAGRANCE FLASK 150 ML",
+  "P110131-ALUMINIUM CAP FOR BOTTLE",
+  "P010360-BOKO 80 ML",
+  "P010362-BOKO 6 RUBBER SEAL",
+  "P010363-STAINLESS STEEL CLIP",
+  "P010364-SELECTISS COTTON TOWEL",
+  "P120250-SPICE CUBE",
+  "P010368-BOKO 60 GLASS LID",
+  "P090148-ISOTHERM BAG HANDLE",
+  "P100068-PUSHCLEAN BUTTON TOWELET",
+  "P110129-CAP FOR OLIVE BOTTLE",
+  "P120240-OLIVE BOTTLE 25 ML",
+  "P120153-MICROWAVE CONTAINER BLACK RECT",
+  "P120155-MICROWAVE CONTAINER BLACK",
+  "P120157-BLACK RECT. DELI CONTAINER",
+  "P120200-ATLAS TRAY2/3 TRASPARENT GREEN",
+  "P120201-LID FOR ATLAS TRAY 2/3",
+  "P120205-GLAZZ HALF SIZE ATLAS TRAY",
+  "P120206-LID FOR HALF SIZE GLAZZ",
+  "P120207-GLAZZ FULL TRAY ATLAS",
+  "P120208-GLAZZ LID FOR FULL SIZE ATLAS",
+  "P120209-GLAZZ MINI SALADIER DIA",
+  "P120210-GLAZZ DOME LID FOR MINI",
+  "P120241-QUARTZ PLATE TRANSPARENT GREEN",
+  "P120242-LID FOR QUARTZ PLATE",
+  "P120243-QUARTZ PLATE TRANSPARENT GREEN",
+  "P120244-STRAIGHT LID FOR QUARTZ PLATE",
+  "P120248-SEA GREEN CUBIK PLATE 65 X 130",
+  "P120249-CUBIK 65 X 130 LID",
+  "P010151-THERMO FLASK S/STEEL HANDY POT",
+  "P120252-TUBE WITH WHITE AQUA 6/1 KNIFE",
+  "P090149-NATURAL CABAS ZEBRA240X175X220",
+  "P080032-RAMEKIN DISH HEIGHT 4 CM",
+  "P010370-BAMBOO BASKET SMALL",
+  "P010241-BAMBOO BASKET MEDIUM",
+  "P010242-BAMBOO BASKET LARGE",
+  "P090252-GOLD LINER 35.3 X 26.2 CM FOR GLASS",
+  "P090253-BLACK LINER 35.3 X 26.2 CM FOR GLASS",
+  "P090254-GOLD LINER 25.7 X 23 CM FOR GLASS 2/3",
+  "P090255-BLACK LINER 25.7 X 23 CM FOR GLASS 2/3",
+  "P090256-GOLD LINER 25.3 X 16.9 CM FOR GLASS 1/2",
+  "P090257-BLACK LINER 25.3 X 16.9 CM FOR GLASS 1/2",
+  "P090291-GOLD BAND LARGE 87 X 4 CM LARGE",
+  "P090292-BLACK BAND LARGE 87 X 4 CM LARGE",
+  "P090264-GOLD BAND LARGE VIP 65.3 X 4 CM",
+  "P090265-BLACK BAND LARGE VIP 65.3 X 4 CM",
+  "P070275-Label Haute Cuisine Large 50x50 mm",
+  "P070276-Label Haute Cuisine Large 50x50 mm",
+  "P070277-Label Haute Cuisine Large50x50 mm",
+  "P090258-GOLD LINER 16.3 X10.8 CM FOR",
+  "P090259-BLACK LINER 16.3 X10.8 CM FOR",
+  "P090260-GOLD LINER 11.2 X 11.2 CM",
+  "P090261-BLACK LINER 11.2 X 11.2 CM",
+  "P090266-GOLD BAND MEDIUM VIP 34.7 X 3 CM",
+  "P090267-BLACK BAND MEDIUM VIP 34.7 X 3 CM",
+  "P070272-Label Haute Cuisine Small 36x36 mm",
+  "P070273-Label Haute Cuisine Small 36x36 mm",
+  "P070274-Label Haute Cuisine Small 36x36 mm",
+  "P090262-GOLD LINER 4.9 X 11.4 CM FOR CUBIC",
+  "P090263-BLACK LINER 4.9 X 11.4 CM FOR CUBIC",
+  "P090268-GOLD BAND SMALL VIP20 X 3 CM",
+  "P090269-BLACK BAND SMALL VIP 20 X 3 CM",
+  "P010413-CRYSTAL GLASS TUMBLER",
+  "P070359-D-LABELS W SECURITY CUTS WHITE",
+  "P070360-D-LABELS W SECURITY CUTS RED",
+  "P070361-D-LABELS W SECURITY CUTS BLUE",
+  "P070362-D-LABELS W SECURITY CUTS GREEN",
+  "P070363-D-LABELS W SECURITY CUTS BROWN",
+  "P070364-D-LABELS W SECURITY CUTS BLACK",
+  "P070365-D-LABELS WSECURITY CUTS YELLOW",
+  "P070366-LABELS PEELABLE PET MATTE FINISH SUNDAY",
+  "P070367-LABELS PEELABLE PET MATTE FINISH MONDAY",
+  "P070368-LABELS PEELABLE PET MATTE FINISH TUESDAY",
+  "P070369-LABELS PEELABLE WEDNESDAY",
+  "P070370-LABELS PEELABLE PET MATTE FINISH THURSDAY",
+  "P070371-LABELS PEELABLE PET MATTE FINISH FRIDAY",
+  "P070372-LABELS PEELABLE PET MATTE FINISH SATURDAY",
+  "R060025-YOGHURT FRUIT 100GM",
+  "R060021-YOGHURT FRUIT 70GM",
+  "R060011-YOGHURT PLAIN 100ML",
+  "R060753-YOGURT BALADE LOW FAT ASST 100 GM",
+  "R060782-YOGURT BALADE PLAIN 100GM",
+  "R061138-YOGHURT SOYA BALADE 100GM ASST",
+  "R061137-YOGHURT SOYA BALADE 100G PLAIN",
+  "R171425-JUICE CARROT 500 ML FLASH PASTEURIZED",
+  "R171443-DETOX CARROT AND APPLE 500 ML",
+  "R171424-JUICE GREEN APPLE 500 ML FLASH PASTEURIZED",
+  "R171417-JUICE MANGO 200 ML FLASH PASTEURIZED",
+  "R171420-JUICE ORANGE 200 ML FLASH PASTEURIZED",
+  "R170452-JUICE PINEAPPLE PASTEURIZED 1 LTR",
+  "R170448-JUICE MANGO PASTEURIZED FRESH 1 LTR",
+  "R171426-JUICE LEMON MINT 500 ML FLASH PASTEURIZED",
+  "R171418-JUICE PINEAPPLE 500 ML FLASH PASTEURIZED",
+  "R171457-SMOOTHIE STRAWBERRY 200 ML HPP",
+  "R060074-CHEESE BEL PAESE 25 GM PORTION",
+  "R060082-CHEESE PORTION PROCESSED",
+  "R060087-CHEESE CAMEMBERT PORTION",
+  "R060094-CHEESE BABYBEL MINI",
+  "R060754-BUTTER PORTION UNSALTED 8 GM",
+  "R060714-BUTTER PORTION 25GM SALTED",
+  "R060554-BUTTER PORTION 25 GM UNSALTED",
+  "R060291-BUTTER PORTION 10GM UNSALTED",
+  "R060355-MARGARINE BEBOLIGHT10G PORTION",
+  "R060465-CHEESE MILD CHEDDAR 20 GM",
+  "R120607-SHORTBREAD DARK CHOCOCHIP 2EA",
+  "R151460-MARBLE CAKE VEGAN 65GM",
+  "R121553-COOKIES VEGAN COCONUT MADELINE-12 GM FLOW WRAP",
+  "R050129-FRUIT BITES CRUNCHY APPLE 50GM",
+  "R170190-JUICE CRANBERRY",
+  "R170032-JUICE MANGO 1 LTR",
+  "R170087-JUICE COCKTAIL 1 LTR",
+  "R170133-JUICE GRAPE 1 LTR",
+  "R170102-JUICE ORANGE CUPLET 100ML",
+  "R170403-JUICE ORANGE FLOAT 180 ML",
+  "R170099-WATER CUPLET 100 ML",
+  "R170419-COCA COLA ZERO 300 ML (1x24)",
+  "R170469-TONIC WATER 300 ML",
+  "R170468-SOFT DRINK GINGER ALE 300ML",
+  "R170386-COCA COLA 500 ML",
+  "R170585-COCA COLA ZERO 500 ML",
+  "R170202-SPARKLING WATER OASIS 1 ltr (1x12)",
+  "R100744-JAM STRAWBERRY DIABETIC JAR 28 GM",
+  "R100122-JAM APRICOT JAR 28 GM",
+  "R100126-JAM ORANGE MARMALADE JAR 28 G",
+  "R100225-HONEY PORTION BONNEMAMAN 30GM",
+  "R100220-JAM STRAWBERRY BONNEMAMAN 30G",
+  "R100224-JAM ORANGE BONNEMAMAN 30GM",
+  "R100223-JAM APRICOT BONNEMAMAN 30GM",
+  "R100113-MARMALADE DIABETIC PORTION",
+  "R101006-MUSTARD ENGLISH JAR 23GM",
+  "R060197-MAYONNAISE PORTION",
+  "R100033-DRESSING LEMON OLIVE OIL 20 ML",
+  "R120833-MACADAMIA MUESLI 50 GM",
+  "R100018-CONDIMENT 1 X 4",
+  "R121673-SAVOURY MIX CHIWDA 10GM PKT",
+  "R120938-COOKIES DOUBLE DARK CHOCOLATE",
+  "F080022-CRISPY PRALINE CHOCOLATE 2PCS",
+  "R160123-DATES WITH ALMOND ENROBED",
+  "F400022-ICE CREAM CHOCOLATE 100 ML PREMIUM",
+  "F400023-ICE CREAM STRAWBERRY 100 ML PREMIUM",
+  "R160273-MIXED NUTS 20GM",
+  "R121007-NATURAL DATE BAR CACAO 10 GM",
+  "R121453-CRACKER GLUTEN FREE 15GM SKINNY GENIE",
+  "R120397-BISCUIT TABLE WATER CRACKER",
+  "R160346-DATES SEEDLESS INDIVIDUAL (EKFC STOCK)",
+  "R160347-DATES MEDJOOL SEEDLESS WRAPPED",
+  "R061249-LABAN FRESH LOW FAT 180 ML",
+  "R060946-LABAN FRESH DRINK 500 ML SAFA BRAND",
+  "P130002-PLASTIC BAG SHOP.PLAIN/W 45X50 (1000EA)",
+  "P090017-TRAY MATS 250X350MM",
+  "P100016-GARBAGE BAG CLEAR 90X110",
+  "P110009-ALU.FOIL COVER[HOOD]172X108X15  ( EY)",
+  "P110010-ALU.FOIL CONT.167X102X28 ( EY )",
+  "P110014-PLASTIC LUNCH BOX 4-COMPARTMEN",
+  "P110016-ALU.FOIL CONT.321X197X28 LARGE",
+  "P110022-ALU.FOIL CONTAINER 198X166X27 MEDIUM",
+  "P110032-ALU.FOIL CONTAINER 7356 SMALL",
+  "P120008-PLASTIC TEASPOON",
+  "P120009-PLASTIC FORK 7 INCH",
+  "P120402-WHITE SALAD BOWL WITH LID  (BA)",
+  "P120010-PLASTIC KNIFE 7INCH",
+  "P120019-PLASTIC SIDE PLATE-160X100X15M",
+  "P120020-TOOTH PICK MINT",
+  "P120021-PLASTIC SAUCE CUP W/LID",
+  "P120038-PLASTIC DINNER SPOON 7 INCH",
+  "P120043-PLASTIC CLEAR CUP W/LID",
+  "P120052-PLASTIC SALAD BOWL90X74X31 (M) SLOW CUP",
+  "P120053-PLASTIC SIDE PLATE DEEP",
+  "P120265-BLACK ROUND MICROWAVE SMALL (RO.25)",
+  "P040003-FOAM BOX 25 KG LARGE",
+  "P040004-FOAM BOX 8 KG SMALL",
+  "P120412-CUTLERY PACK ROLL PRINTED PLAIN WHITE ROLL",
+  "P130029-SANDWICH BAG WHITE PAPER",
+  "P130099-SNACK BOX RECTANGLE FOR CREW",
+  "P130025-OVEN BAG25X38CM MICRO",
+  "P040552-BLACK BOX 1/3 W WINDOW",
+  "P090313-FOOT BALL THEME LINER",
+  "P040553-BLACK TRAY FOR ROUND CONATINER",
+  "P040553-BLACK TRAY FOR ROUND CONATINER",
+  "P040571-VIP BOX TOP AND BOTTOM TYPE",
+);
+
+  const quantityTypes = ["pcs", "box", "carton", "pack", "bottle"];
+  const container = document.getElementById("itemContainer");
+
+  // ✅ Create datalist for item autocomplete
+  const datalist = document.createElement("datalist");
+  datalist.id = "itemList";
+  itemOptions.forEach(item => {
+    const option = document.createElement("option");
+    option.value = item;
+    datalist.appendChild(option);
+  });
+  document.body.appendChild(datalist);
+
+  // ✅ Function to create a single item row
+  function createItemRow(index) {
+    const row = document.createElement("div");
+    row.className = "item-row";
+    row.style.display = "flex";
+    row.style.gap = "8px";
+    row.style.alignItems = "center";
+    row.style.marginBottom = "6px";
+
+    const itemInput = document.createElement("input");
+    itemInput.setAttribute("list", "itemList");
+    itemInput.name = "itemDetails[]";
+    itemInput.placeholder = `Select Item ${index + 1}`;
+    itemInput.style.flex = "2";
+
+    const quantityInput = document.createElement("input");
+    quantityInput.type = "number";
+    quantityInput.name = "quantity[]";
+    quantityInput.placeholder = "Qty";
+    quantityInput.min = "1";
+    quantityInput.style.flex = "1";
+
+    const quantityTypeSelect = document.createElement("select");
+    quantityTypeSelect.name = "quantityType[]";
+    quantityTypeSelect.innerHTML = `<option value="">UOM</option>` +
+      quantityTypes.map(type => `<option value="${type}">${type}</option>`).join('');
+    quantityTypeSelect.style.flex = "1";
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.type = "button";
+    deleteBtn.textContent = "Delete";
+    deleteBtn.style.flex = "0";
+    deleteBtn.style.padding = "4px 8px";
+    deleteBtn.style.cursor = "pointer";
+    deleteBtn.onclick = () => row.remove();
+
+    row.appendChild(itemInput);
+    row.appendChild(quantityInput);
+    row.appendChild(quantityTypeSelect);
+    row.appendChild(deleteBtn);
+    container.appendChild(row);
+  }
+
+  // ✅ Generate initial 12 item rows
+  for (let i = 0; i < 12; i++) {
+    createItemRow(i);
+  }
+
+  // ✅ Add button functionality
+  document.getElementById("addItemBtn").addEventListener("click", () => {
+    const currentRows = container.querySelectorAll(".item-row").length;
+    createItemRow(currentRows);
+  });
+
+  // ✅ Update filled state for styling
+  function updateFilledState() {
+    document.querySelectorAll('input, select, textarea').forEach(el => {
+      if (el.value.trim() !== '') {
+        el.classList.add('filled');
+      } else {
+        el.classList.remove('filled');
+      }
+    });
+  }
+
+  document.querySelectorAll('input, select, textarea').forEach(el => {
+    el.addEventListener('input', updateFilledState);
+  });
+
+  document.getElementById("requestForm").addEventListener("reset", () => {
+    setTimeout(updateFilledState, 50);
+  });
+
+  // ✅ Final fix for auto-closing calendar popup on datetime-local selection
+  const timestampInput = document.getElementById("timestamp");
+  if (timestampInput) {
+    timestampInput.addEventListener("input", function () {
+      this.blur();
+      window.requestAnimationFrame(() => {
+        document.activeElement.blur();
+      });
+    });
+  }
+
+  // ✅ Form submission handler
+  document.getElementById("requestForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const formData = new FormData(form);
+    const payload = new URLSearchParams();
+
+    const itemDetails = formData.getAll("itemDetails[]");
+    const quantities = formData.getAll("quantity[]");
+    const quantityTypes = formData.getAll("quantityType[]");
+
+    itemDetails.forEach((item, index) => {
+      if (item.trim() !== "") {
+        const qty = quantities[index]?.trim() || "?";
+        const type = quantityTypes[index]?.trim() || "?";
+        payload.append(`itemDetails[${index}]`, item.trim());
+        payload.append(`quantity[${index}]`, qty);
+        payload.append(`quantityType[${index}]`, type);
+      }
+    });
+
+    formData.forEach((value, key) => {
+      if (!["itemDetails[]", "quantity[]", "quantityType[]"].includes(key)) {
+        if (key === "fileUpload") {
+          payload.append("fileUpload", value.name || "N/A");
+        } else {
+          payload.append(key, value);
+        }
+      }
+    });
+
+    fetch("https://script.google.com/macros/s/AKfycbzd6XcFcIPKryVikrKsY6OMAz4-zC058edNKBfayWq4DMrEQ2BG6BKoU0NScpLLQVThRw/exec", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: payload
+    })
+    .then(response => response.text())
+    .then(result => {
+      const successMessage = document.createElement("div");
+      successMessage.textContent = "✅ Your Request has been submitted successfully!";
+      successMessage.style.position = "absolute";
+      successMessage.style.top = "50%";
+      successMessage.style.left = "50%";
+      successMessage.style.transform = "translate(-50%, -50%)";
+      successMessage.style.backgroundColor = "#34d399";
+      successMessage.style.color = "#fff";
+      successMessage.style.padding = "1em 2em";
+      successMessage.style.borderRadius = "8px";
+      successMessage.style.boxShadow = "0 4px 12px rgba(0,0,0,0.2)";
+      successMessage.style.zIndex = "1000";
+      successMessage.style.fontSize = "1.2em";
+      successMessage.style.textAlign = "center";
+
+      const formWrapper = document.getElementById("requestForm");
+      formWrapper.style.position = "relative";
+      formWrapper.appendChild(successMessage);
+
+      form.reset();
+      updateFilledState();
+
+      setTimeout(() => {
+        successMessage.remove();
+      }, 5000);
+    })
+    .catch(error => {
+      alert("❌ Submission failed: " + error);
+    });
+  });
+</script>
