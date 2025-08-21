@@ -66,64 +66,61 @@
       min-width: 220px;
     }
 
-.item-row {
-  display: flex;
-  align-items: center;
-  gap: 0.8em;
-  margin-top: 0.8em;
-  flex-wrap: nowrap;
-}
+    .item-row {
+      display: flex;
+      align-items: center;
+      gap: 0.8em;
+      margin-top: 0.8em;
+      flex-wrap: nowrap;
+    }
 
-/* ✅ Item input box বড় */
-.item-row input[list="itemList"] {
-  flex: 5;
-  min-width: 60%;
-  height: 42px;
-  font-size: 1em;
-  padding: 0.4em;
-}
+    .item-row input[list="itemList"] {
+      flex: 5;
+      min-width: 60%;
+      height: 42px;
+      font-size: 1em;
+      padding: 0.4em;
+    }
 
-/* ✅ Quantity input ছোট */
-.item-row input[type="number"] {
-  flex: 1;
-  max-width: 12%;
-  height: 34px;
-  font-size: 0.9em;
-  padding: 0.3em;
-}
+    .item-row input[type="number"] {
+      flex: 1;
+      max-width: 12%;
+      height: 34px;
+      font-size: 0.9em;
+      padding: 0.3em;
+    }
 
-/* ✅ Quantity type select ছোট */
-.item-row select[name="quantityType[]"] {
-  flex: 1;
-  max-width: 12%;
-  height: 34px;
-  font-size: 0.9em;
-  padding: 0.3em;
-}
+    .item-row select[name="quantityType[]"] {
+      flex: 1;
+      max-width: 12%;
+      height: 34px;
+      font-size: 0.9em;
+      padding: 0.3em;
+    }
 
-/* ✅ Delete button styling */
-.item-row button {
-  flex: 0;
-  height: 34px;
-  font-size: 1em;
-  background-color: #f87171;
-  color: white;
-  border: none;
-  padding: 0 0.6em;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
+    .item-row button {
+      flex: 0;
+      height: 34px;
+      font-size: 1em;
+      background-color: #f87171;
+      color: white;
+      border: none;
+      padding: 0 0.6em;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
 
-.item-row button:hover {
-  background-color: #ef4444;
-}
+    .item-row button:hover {
+      background-color: #ef4444;
+    }
 
     .button-group {
       margin-top: 1.5em;
       display: flex;
       justify-content: space-between;
     }
+
     button {
       padding: 0.6em 1.5em;
       font-weight: bold;
@@ -133,20 +130,68 @@
       transition: background-color 0.3s;
       font-size: 0.95em;
     }
-    button[type="submit"] {
-      background-color: #3b82f6;
-      color: white;
-    }
-    button[type="submit"]:hover {
-      background-color: #2563eb;
-    }
+
+/* ✅ Submit button - full deep green with white text */
+button[type="submit"] {
+  background-color: #059669; /* deep green */
+  color: white;              /* white text */
+}
+
+button[type="submit"]:hover {
+  background-color: #047857; /* darker green on hover */
+  color: white;
+}
+
+    /* ✅ Reset button - red */
     button[type="reset"] {
-      background-color: #f87171;
+      background-color: #ef4444;
       color: white;
     }
+
     button[type="reset"]:hover {
-      background-color: #ef4444;
+      background-color: #fca5a5;
     }
+
+    #submitBtn.processing {
+      background: linear-gradient(270deg, #a7f3d0, #6ee7b7, #34d399);
+      background-size: 600% 600%;
+      animation: gradientFlow 2s linear infinite;
+      color: light green;
+      border: none;
+      text-align: center;
+      display: inline-block;
+      width: 100%;
+      padding: 12px 0;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 6px;
+    }
+
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
+    #progressBar {
+      width: 0%;
+      height: 6px;
+      background-color: #6ee7b7;
+      transition: width 0.2s ease;
+      margin-top: 12px;
+      border-radius: 4px;
+      position: relative;
+    }
+
+    #progressText {
+      position: absolute;
+      top: -24px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.9em;
+      color: #059669;
+      font-weight: bold;
+    }
+
     h2 {
       margin-top: 1.5em;
       color: #1e3a8a;
@@ -249,6 +294,7 @@
 <option value="A9 - GEORGIAN AIRWAYS">
 <option value="AA - AMERICAN AIRLINES INC.">
 <option value="AB - AIR BERLIN GMBH & CO. LUFTVERK">
+<option value="AC - AIR CANADA">
 <option value="AC - AIR CANADA">
 <option value="ACH - AIR CHEF HOLDINGS LLC">
 <option value="ACW - TITAN AIRWAYS">
@@ -1619,7 +1665,6 @@ itemOptions.push(
   const quantityTypes = ["pcs", "box", "carton", "pack", "bottle"];
   const container = document.getElementById("itemContainer");
 
-  // ✅ Create datalist for item autocomplete
   const datalist = document.createElement("datalist");
   datalist.id = "itemList";
   itemOptions.forEach(item => {
@@ -1629,7 +1674,6 @@ itemOptions.push(
   });
   document.body.appendChild(datalist);
 
-  // ✅ Function to create a single item row
   function createItemRow(index) {
     const row = document.createElement("div");
     row.className = "item-row";
@@ -1672,18 +1716,15 @@ itemOptions.push(
     container.appendChild(row);
   }
 
-  // ✅ Generate initial 12 item rows
   for (let i = 0; i < 12; i++) {
     createItemRow(i);
   }
 
-  // ✅ Add button functionality
   document.getElementById("addItemBtn").addEventListener("click", () => {
     const currentRows = container.querySelectorAll(".item-row").length;
     createItemRow(currentRows);
   });
 
-  // ✅ Update filled state for styling
   function updateFilledState() {
     document.querySelectorAll('input, select, textarea').forEach(el => {
       if (el.value.trim() !== '') {
@@ -1702,7 +1743,6 @@ itemOptions.push(
     setTimeout(updateFilledState, 50);
   });
 
-  // ✅ Final fix for auto-closing calendar popup on datetime-local selection
   const timestampInput = document.getElementById("timestamp");
   if (timestampInput) {
     timestampInput.addEventListener("input", function () {
@@ -1713,9 +1753,33 @@ itemOptions.push(
     });
   }
 
-  // ✅ Form submission handler
+  // ✅ Add progress bar and percentage text
+  const submitBtn = document.querySelector("#requestForm button[type='submit']");
+  submitBtn.id = "submitBtn";
+  const progressBar = document.createElement("div");
+  progressBar.id = "progressBar";
+  const progressText = document.createElement("div");
+  progressText.id = "progressText";
+  progressText.textContent = "0%";
+  progressBar.appendChild(progressText);
+  submitBtn.insertAdjacentElement("afterend", progressBar);
+
   document.getElementById("requestForm").addEventListener("submit", function (e) {
     e.preventDefault();
+
+    submitBtn.textContent = "Processing…";
+    submitBtn.classList.add("processing");
+    progressBar.style.width = "0%";
+    progressText.textContent = "0%";
+
+    let percent = 0;
+    const interval = setInterval(() => {
+      if (percent < 100) {
+        percent += 1;
+        progressBar.style.width = `${percent}%`;
+        progressText.textContent = `${percent}%`;
+      }
+    }, 50);
 
     const form = e.target;
     const formData = new FormData(form);
@@ -1754,6 +1818,12 @@ itemOptions.push(
     })
     .then(response => response.text())
     .then(result => {
+      clearInterval(interval);
+      progressBar.style.width = "100%";
+      progressText.textContent = "100%";
+      submitBtn.textContent = "Submitted ✅";
+      submitBtn.classList.remove("processing");
+
       const successMessage = document.createElement("div");
       successMessage.textContent = "✅ Your Request has been submitted successfully!";
       successMessage.style.position = "absolute";
@@ -1778,10 +1848,18 @@ itemOptions.push(
 
       setTimeout(() => {
         successMessage.remove();
+        progressBar.style.width = "0%";
+        progressText.textContent = "0%";
+        submitBtn.textContent = "Submit";
       }, 5000);
     })
     .catch(error => {
+      clearInterval(interval);
       alert("❌ Submission failed: " + error);
+      submitBtn.textContent = "Submit";
+      submitBtn.classList.remove("processing");
+      progressBar.style.width = "0%";
+      progressText.textContent = "0%";
     });
   });
 </script>
