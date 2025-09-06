@@ -1788,6 +1788,65 @@ itemOptions.push(
   document.getElementById("requestForm").addEventListener("submit", function (e) {
     e.preventDefault();
 
+    // ✅ Validate required fields before item rows
+    const requiredFields = [
+      { id: "timestamp", label: "Date & Time" },
+      { id: "requestFor", label: "Request For" },
+      { id: "airlineCodeBox", label: "Airline Code / EKFC" },
+      { id: "flightNo", label: "Flight No" },
+      { id: "requestedByERP", label: "Requested By (ERP No)" },
+      { id: "requestedByName", label: "Requested By Name" },
+      { id: "reasonForRequest", label: "Reason For Request" }
+    ];
+
+    let missingFields = [];
+
+    requiredFields.forEach(field => {
+      const input = document.getElementById(field.id);
+      const value = input.value.trim();
+
+      if (!value) {
+        missingFields.push(field.label);
+        input.style.border = "2px solid red";
+      } else {
+        input.style.border = "2px solid #34d399";
+      }
+    });
+
+    if (missingFields.length > 0) {
+      const warningMessage = document.createElement("div");
+      warningMessage.textContent = `⚠️ Please fill the following ${missingFields.length} field(s):\n- ${missingFields.join("\n- ")}`;
+      warningMessage.style.position = "absolute";
+      warningMessage.style.top = "50%";
+      warningMessage.style.left = "50%";
+      warningMessage.style.transform = "translate(-50%, -50%)";
+      warningMessage.style.backgroundColor = "#f87171";
+      warningMessage.style.color = "#fff";
+      warningMessage.style.padding = "1em 2em";
+      warningMessage.style.borderRadius = "8px";
+      warningMessage.style.boxShadow = "0 4px 12px rgba(0,0,0,0.2)";
+      warningMessage.style.zIndex = "1000";
+      warningMessage.style.fontSize = "1.4em";
+      warningMessage.style.fontWeight = "bold";
+      warningMessage.style.textAlign = "center";
+      warningMessage.style.whiteSpace = "pre-line";
+
+      const formWrapper = document.getElementById("requestForm");
+      formWrapper.style.position = "relative";
+      formWrapper.appendChild(warningMessage);
+
+      submitBtn.textContent = "Submit";
+      submitBtn.classList.remove("processing");
+      progressBar.style.width = "0%";
+      progressText.textContent = "0%";
+
+      setTimeout(() => {
+        warningMessage.remove();
+      }, 4000);
+
+      return;
+    }
+
     const itemRows = container.querySelectorAll(".item-row");
     let isValid = true;
 
@@ -1928,11 +1987,11 @@ itemOptions.push(
         progressText.textContent = "0%";
         submitBtn.textContent = "Submit";
 
-        // ✅ Clear all input and select fields inside the form
         const allFields = formWrapper.querySelectorAll("input, select");
         allFields.forEach(field => {
           field.value = "";
           field.style.backgroundColor = "";
+          field.style.border = "";
         });
       }, 5000);
     })
