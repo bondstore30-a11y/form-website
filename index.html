@@ -7,9 +7,47 @@
     body {
       font-family: 'Segoe UI', sans-serif;
       margin: 0;
-      padding: 1.5em;
-      background: linear-gradient(to right, #dbeafe, #f0f9ff);
+      padding: 2em;
+      background: linear-gradient(to right, #fdf2f8, #f0fdfa);
     }
+
+    .header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2em;
+    }
+
+    .logo {
+      width: 220px;
+      height: auto;
+      object-fit: contain;
+      margin-bottom: 0.5em;
+    }
+
+    .company-name {
+      font-size: 2.1em;
+      font-weight: 700;
+      color: #7c2d12;
+      font-style: italic;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.1em;
+      text-align: center;
+    }
+
+    .form-title {
+      font-size: 1.55em;
+      color: #065f46;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 0.1em;
+      border-bottom: 2px solid #14b8a6;
+      padding-bottom: 0.3em;
+      width: fit-content;
+    }
+
     h1 {
       text-align: center;
       color: #1e3a8a;
@@ -202,7 +240,14 @@ button[type="submit"]:hover {
   </style>
 </head>
 <body>
-  <h1>Bonded Items Request Submission Form</h1>
+
+  <div class="header">
+<img src="https://example.com/emirates-logo.png" alt="Emirates Flight Catering Logo" class="logo">
+
+    <div class="company-name">Emirates Flight Catering</div>
+    <div class="form-title">Bonded Items Request Submission Form</div>
+  </div>
+
   <form id="requestForm">
     <div class="row">
       <div>
