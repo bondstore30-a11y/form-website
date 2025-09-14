@@ -13,39 +13,41 @@
 
     .header {
       display: flex;
-      flex-direction: column;
+      justify-content: center; /* লেখাগুলো মাঝখানে */
       align-items: center;
-      justify-content: center;
+      gap: 1.5em;
       margin-bottom: 2em;
+      flex-wrap: wrap;
     }
 
-    .logo {
-      width: 220px;
-      height: auto;
-      object-fit: contain;
-      margin-bottom: 0.5em;
+    .text-block {
+      text-align: center;
     }
 
     .company-name {
-      font-size: 2.1em;
+      font-size: 2.20em;
       font-weight: 700;
       color: #7c2d12;
       font-style: italic;
       text-transform: uppercase;
       letter-spacing: 1px;
-      margin-bottom: 0.1em;
-      text-align: center;
+      margin-bottom: 0.2em;
     }
 
     .form-title {
-      font-size: 1.55em;
+      font-size: 1.65em;
       color: #065f46;
       font-weight: bold;
-      text-align: center;
-      margin-top: 0.1em;
       border-bottom: 2px solid #14b8a6;
-      padding-bottom: 0.3em;
+      padding-bottom: 0.2em;
       width: fit-content;
+      margin: 0 auto;
+    }
+
+    .logo {
+      width: 120px;
+      height: auto;
+      object-fit: contain;
     }
 
     h1 {
@@ -241,11 +243,15 @@ button[type="submit"]:hover {
 </head>
 <body>
 
-  <div class="header">
-<img src="https://example.com/emirates-logo.png" alt="Emirates Flight Catering Logo" class="logo">
+ <div class="header">
+    <!-- ✅ মাঝখানের লেখাগুলো -->
+    <div class="text-block">
+      <div class="company-name">Emirates Flight Catering</div>
+      <div class="form-title">Bonded Items Request Submission Form</div>
+    </div>
 
-    <div class="company-name">Emirates Flight Catering</div>
-    <div class="form-title">Bonded Items Request Submission Form</div>
+    <!-- ✅ ডান পাশে লোগো -->
+  <img src="https://copilot.microsoft.com/th/id/BCO.4d4ee4a9-eba0-4fd5-9928-02e3e6ba525d.png" alt="Emirates Flight Catering Logo" class="logo">
   </div>
 
   <form id="requestForm">
