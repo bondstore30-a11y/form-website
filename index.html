@@ -1719,7 +1719,7 @@ itemOptions.push(
   "P040571-VIP BOX TOP AND BOTTOM TYPE",
 );
 
-  const quantityTypes = ["pcs", "box", "carton", "pack", "bottle"];
+  const quantityTypes = ["Pcs", "Box", "Carton", "Pack", "Bottle"];
   const container = document.getElementById("itemContainer");
 
   const datalist = document.createElement("datalist");
@@ -1762,7 +1762,7 @@ itemOptions.push(
     deleteBtn.type = "button";
     deleteBtn.textContent = "Delete";
     deleteBtn.style.flex = "0";
-    deleteBtn.style.padding = "4px 8px";
+    deleteBtn.style.padding = "3.5px 6px";
     deleteBtn.style.cursor = "pointer";
     deleteBtn.onclick = () => row.remove();
 
@@ -1899,7 +1899,7 @@ itemOptions.push(
 
       setTimeout(() => {
         warningMessage.remove();
-      }, 4000);
+      }, 3000);
 
       return;
     }
@@ -2050,7 +2050,7 @@ itemOptions.push(
           field.style.backgroundColor = "";
           field.style.border = "";
         });
-      }, 5000);
+      }, 4000);
     })
     .catch(error => {
       clearInterval(interval);
