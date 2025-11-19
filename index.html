@@ -253,51 +253,60 @@ button[type="submit"]:hover {
 
 <form id="requestForm">
 
-  <!-- Row with all boxes side by side -->
-  <div class="row" 
-       style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1em; border-bottom:2px solid #ccc; padding-bottom:10px;">
+<!-- Row with all boxes side by side -->
+<div class="row" 
+     style="display:flex; flex-wrap:nowrap; justify-content:space-between; align-items:flex-start; margin-bottom:1em; border-bottom:2px solid #ccc; padding-bottom:10px;">
 
-    <!-- Previous Requisition No: Box (Left Side) -->
-    <div style="flex:1; margin-right:10px;">
-      <label for="previousReq" style="display:block; margin-bottom:2px;">Requisition No</label>
-      <div id="previousReq" 
-           style="border:1px solid #ccc; padding:3px; border-radius:4px; height:30px;">
-        <!-- Submission numbers will appear here -->
-      </div>
+  <!-- Previous Requisition No -->
+  <div style="flex:1; margin-right:10px;">
+    <label for="previousReq" style="display:block; margin-bottom:2px;">Requisition No</label>
+    <div id="previousReq" 
+         style="border:1px solid #ccc; padding:3px; border-radius:4px; height:30px;">
+      <!-- Submission numbers will appear here -->
     </div>
-
-    <!-- Search Requisition No: Box (Middle) -->
-    <div style="flex:1; margin-right:10px;">
-      <label for="searchNumber" style="display:block; margin-bottom:2px;">Search Requisition Number</label>
-      <div id="searchBox" 
-           style="border:1px solid #ccc; padding:3px; border-radius:4px; height:30px; display:flex; align-items:center; justify-content:space-between;">
-        <input type="number" id="searchNumber" placeholder="Enter number" 
-               style="border:none; outline:none; flex:1; height:100%; padding-left:5px;">
-        <button type="button" onclick="searchSubmission()" 
-                style="border:none; background:#eee; border-radius:4px; height:100%; padding:0 10px; margin-left:5px; cursor:pointer;">
-          Search
-        </button>
-      </div>
-    </div>
-
-    <!-- Search by Date: Box (Right Side) -->
-    <div style="flex:1;">
-      <label for="searchDate" style="display:block; margin-bottom:2px;">Search by Date</label>
-      <div id="searchDateBox" 
-           style="border:1px solid #ccc; padding:3px; border-radius:4px; height:30px; display:flex; align-items:center; justify-content:space-between;">
-        <input type="date" id="searchDate" 
-               style="border:none; outline:none; flex:1; height:100%; padding-left:5px;">
-        <button type="button" onclick="searchByDate()" 
-                style="border:none; background:#eee; border-radius:4px; height:100%; padding:0 10px; margin-left:5px; cursor:pointer;">
-          Search
-        </button>
-      </div>
-    </div>
-
   </div>
 
-  <!-- Search Result Output -->
-  <div id="searchResult" style="margin-top:30px;"></div>
+  <!-- Search Requisition Number -->
+  <div style="flex:1; margin-right:10px;">
+    <label for="searchNumber" style="display:block; margin-bottom:2px;">Search Requisition Number</label>
+    <div id="searchBox" 
+         style="border:1px solid #ccc; padding:3px; border-radius:4px; height:30px; display:flex; align-items:center; justify-content:space-between;">
+      <input type="number" id="searchNumber" placeholder="Enter number" 
+             style="border:none; outline:none; flex:1; height:100%; padding-left:5px;">
+      <button type="button" onclick="searchSubmission()" 
+              style="border:none; background:#eee; border-radius:4px; height:100%; padding:0 10px; margin-left:5px; cursor:pointer;">
+        Search
+      </button>
+    </div>
+  </div>
+
+  <!-- Search by Date -->
+  <div style="flex:1;">
+    <label for="searchDate" style="display:block; margin-bottom:2px;">Search by Date</label>
+    <div id="searchDateBox" 
+         style="border:1px solid #ccc; padding:3px; border-radius:4px; height:30px; display:flex; align-items:center; justify-content:space-between;">
+      <input type="date" id="searchDate" 
+             style="border:none; outline:none; flex:1; height:100%; padding-left:5px;">
+      <button type="button" onclick="searchByDate()" 
+              style="border:none; background:#eee; border-radius:4px; height:100%; padding:0 10px; margin-left:5px; cursor:pointer;">
+        Search
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<!-- Search Result Output -->
+<div id="searchResult" style="margin-top:30px;"></div>
+
+<!-- Date & Time stays below -->
+<div class="row" style="margin-top:20px;">
+  <div>
+    <label for="timestamp" style="display:block; margin-bottom:2px;">Date & Time</label>
+    <input type="datetime-local" id="timestamp" name="timestamp" 
+           style="border:1px solid #ccc; padding:3px; border-radius:4px; height:30px;">
+  </div>
+</div>
 
   <!-- তারপর আসবে Date & Time -->
   <div class="row">
