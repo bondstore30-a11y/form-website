@@ -243,24 +243,73 @@ button[type="submit"]:hover {
 </head>
 <body>
 
- <div class="header">
+<div class="header">
     <!-- ✅ মাঝখানের লেখাগুলো -->
     <div class="text-block">
       <div class="company-name">Emirates Flight Catering</div>
       <div class="form-title">Bonded Items Request Submission Form</div>
     </div>
+</div>
 
-    <!-- ✅ ডান পাশে লোগো -->
-  <img src="https://copilot.microsoft.com/th/id/BCO.4d4ee4a9-eba0-4fd5-9928-02e3e6ba525d.png" alt="Emirates Flight Catering Logo" class="logo">
-  </div>
+<form id="requestForm">
 
-  <form id="requestForm">
-    <div class="row">
-      <div>
-        <label for="timestamp">Date & Time</label>
-        <input type="datetime-local" id="timestamp" name="timestamp">
+  <!-- Row with all boxes side by side -->
+  <div class="row" 
+       style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1em; border-bottom:2px solid #ccc; padding-bottom:10px;">
+
+    <!-- Previous Requisition No: Box (Left Side) -->
+    <div style="flex:1; margin-right:10px;">
+      <label for="previousReq" style="display:block; margin-bottom:2px;">Requisition No</label>
+      <div id="previousReq" 
+           style="border:1px solid #ccc; padding:3px; border-radius:4px; height:30px;">
+        <!-- Submission numbers will appear here -->
       </div>
     </div>
+
+    <!-- Search Requisition No: Box (Middle) -->
+    <div style="flex:1; margin-right:10px;">
+      <label for="searchNumber" style="display:block; margin-bottom:2px;">Search Requisition Number</label>
+      <div id="searchBox" 
+           style="border:1px solid #ccc; padding:3px; border-radius:4px; height:30px; display:flex; align-items:center; justify-content:space-between;">
+        <input type="number" id="searchNumber" placeholder="Enter number" 
+               style="border:none; outline:none; flex:1; height:100%; padding-left:5px;">
+        <button type="button" onclick="searchSubmission()" 
+                style="border:none; background:#eee; border-radius:4px; height:100%; padding:0 10px; margin-left:5px; cursor:pointer;">
+          Search
+        </button>
+      </div>
+    </div>
+
+    <!-- Search by Date: Box (Right Side) -->
+    <div style="flex:1;">
+      <label for="searchDate" style="display:block; margin-bottom:2px;">Search by Date</label>
+      <div id="searchDateBox" 
+           style="border:1px solid #ccc; padding:3px; border-radius:4px; height:30px; display:flex; align-items:center; justify-content:space-between;">
+        <input type="date" id="searchDate" 
+               style="border:none; outline:none; flex:1; height:100%; padding-left:5px;">
+        <button type="button" onclick="searchByDate()" 
+                style="border:none; background:#eee; border-radius:4px; height:100%; padding:0 10px; margin-left:5px; cursor:pointer;">
+          Search
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Search Result Output -->
+  <div id="searchResult" style="margin-top:30px;"></div>
+
+  <!-- তারপর আসবে Date & Time -->
+  <div class="row">
+    <div>
+      <!-- এখানে Date & Time আসবে -->
+    </div>
+  </div>
+
+      <label for="timestamp">Date & Time</label>
+      <input type="datetime-local" id="timestamp" name="timestamp">
+    </div>
+  </div>
 
     <div class="row">
       <div>
@@ -1741,9 +1790,9 @@ itemOptions.push(
     const row = document.createElement("div");
     row.className = "item-row";
     row.style.display = "flex";
-    row.style.gap = "8px";
+    row.style.gap = "4px";
     row.style.alignItems = "center";
-    row.style.marginBottom = "6px";
+    row.style.marginBottom = "4px";
 
     const itemInput = document.createElement("input");
     itemInput.setAttribute("list", "itemList");
@@ -2009,13 +2058,13 @@ itemOptions.push(
       }
     });
 
-    fetch("https://script.google.com/macros/s/AKfycbzd6XcFcIPKryVikrKsY6OMAz4-zC058edNKBfayWq4DMrEQ2BG6BKoU0NScpLLQVThRw/exec", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      body: payload
-    })
+  fetch("https://script.google.com/macros/s/AKfycbwDaz4iydD85j-iPMMQEcRFmJzl-2WVPe8ZDuhe3FqpZIi_0UpYmOgSIRKOV9SSkaRA-w/exec", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: payload
+  })
     .then(response => response.text())
     .then(result => {
       clearInterval(interval);
@@ -2043,6 +2092,12 @@ itemOptions.push(
       const formWrapper = document.getElementById("requestForm");
       formWrapper.style.position = "relative";
       formWrapper.appendChild(successMessage);
+
+      // ✅ নতুন সাবমিশন Req নম্বর যোগ করো
+  const newReqNo = String(submissions.length + 1).padStart(5, "0"); // 00001, 00002, ...
+  const today = new Date().toISOString().split("T")[0];
+      submissions.push({ reqNo: newReqNo, date: today, data: "Data for " + newReqNo });
+      showLatestReq();
 
       setTimeout(() => {
         successMessage.remove();
@@ -2103,4 +2158,117 @@ itemOptions.push(
     field.addEventListener("input", () => updateFieldBackground(field));
     field.addEventListener("change", () => updateFieldBackground(field));
   });
+
+// ---------------- My Requisition Script ----------------
+let submissions = JSON.parse(localStorage.getItem("submissions")) || [];
+
+// ✅ সর্বশেষ Req নম্বর দেখাও
+function showLatestReq() {
+  if (submissions.length === 0) {
+    document.getElementById("previousReq").textContent = "No submissions yet";
+    return;
+  }
+  const latest = submissions[submissions.length - 1];
+  document.getElementById("previousReq").textContent = latest.reqNo;
+}
+
+// ✅ ফর্মে ডেটা বসানোর জন্য আলাদা ফাংশন
+function fillForm(data) {
+  document.getElementById("dateTime").value = data.dateTime || "";
+  document.getElementById("requestFor").value = data.requestFor || "";
+  document.getElementById("airlineCode").value = data.airlineCode || "";
+  document.getElementById("flightNo").value = data.flightNo || "";
+  document.getElementById("erpNo").value = data.erpNo || "";
+  document.getElementById("requestedByName").value = data.requestedByName || "";
+  document.getElementById("reason").value = data.reason || "";
+  document.getElementById("approvedBy").value = data.approvedBy || "";
+  document.getElementById("additionalNote").value = data.additionalNote || "";
+}
+
+// ✅ Search by requisition number → ফর্মে আগের মতো ডেটা বসবে
+function searchSubmission() {
+  const input = document.getElementById("searchNumber").value.trim();
+  const searchNo = input.padStart(5, "0");
+
+  const match = submissions.find(s => s.reqNo === searchNo);
+
+  if (!match) {
+    document.getElementById("searchMessage").textContent = "No data found";
+    return;
+  }
+
+  fillForm(match.data);
+  document.getElementById("itemsContainer").innerHTML = `
+    <label>Item: </label>
+    <input type="text" value="${match.data.selectItems || ""}" />
+    <label>Qty: </label>
+    <input type="text" value="${match.data.qty || ""}" />
+    <label>Unit: </label>
+    <input type="text" value="${match.data.unit || ""}" />
+  `;
+  document.getElementById("searchMessage").textContent = "Data loaded into form";
+}
+
+// ✅ নতুন submission সেভ করো
+function addNewSubmission() {
+  const newReqNo = String(submissions.length + 1).padStart(5, "0");
+  const today = new Date().toISOString().split("T")[0];
+
+  const details = {
+    dateTime: document.getElementById("dateTime").value,
+    requestFor: document.getElementById("requestFor").value,
+    airlineCode: document.getElementById("airlineCode").value,
+    flightNo: document.getElementById("flightNo").value,
+    erpNo: document.getElementById("erpNo").value,
+    requestedByName: document.getElementById("requestedByName").value,
+    reason: document.getElementById("reason").value,
+    approvedBy: document.getElementById("approvedBy").value,
+    selectItems: document.getElementById("selectItems")?.value || "",
+    qty: document.getElementById("qty")?.value || "",
+    unit: document.getElementById("unit")?.value || "",
+    additionalNote: document.getElementById("additionalNote").value
+  };
+
+  submissions.push({
+    reqNo: newReqNo,
+    date: today,
+    data: details
+  });
+
+  localStorage.setItem("submissions", JSON.stringify(submissions));
+  showLatestReq();
+}
+
+// ✅ Search by date → একই দিনে সব submission ফর্মে row আকারে বসবে
+function searchByDate() {
+  const dateVal = document.getElementById("searchDate").value;
+  const matches = submissions.filter(s => s.date === dateVal);
+
+  const container = document.getElementById("itemsContainer");
+  container.innerHTML = "";
+
+  if (matches.length === 0) {
+    document.getElementById("searchMessage").textContent = "No submissions on this date";
+    return;
+  }
+
+  matches.forEach((s, index) => {
+    const data = s.data;
+    const row = document.createElement("div");
+    row.style.marginBottom = "8px";
+    row.innerHTML = `
+      <label>Item ${index + 1}: </label>
+      <input type="text" value="${data.selectItems || ""}" style="width:150px;" />
+      <label>Qty: </label>
+      <input type="text" value="${data.qty || ""}" style="width:60px;" />
+      <label>Unit: </label>
+      <input type="text" value="${data.unit || ""}" style="width:80px;" />
+    `;
+    container.appendChild(row);
+  });
+
+  document.getElementById("searchMessage").textContent = "All submissions for this date loaded into form";
+}
+
+window.onload = showLatestReq;
 </script>
