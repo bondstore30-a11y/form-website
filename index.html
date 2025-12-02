@@ -260,52 +260,54 @@ button[type="submit"]:hover {
 </head>
 <body>
 
-<div class="header">
-    <!-- ✅ মাঝখানের লেখাগুলো -->
-    <div class="text-block">
-      <div class="company-name">Emirates Flight Catering</div>
-      <div class="form-title">Bonded Items Request Submission Form</div>
-    </div>
+<div class="header" style="margin-top:-10px; margin-bottom:15px;"> <!-- gap একটু বাড়ানো হলো -->
+  <!-- ✅ মাঝখানের লেখাগুলো -->
+  <div class="text-block" style="line-height:1.1; margin-top:-5px;">
+    <div class="company-name" style="margin:0;">Emirates Flight Catering</div>
+    <div class="form-title" style="margin:0;">Bonded Items Request Submission Form</div>
+  </div>
 </div>
+
+<form id="requestForm" style="margin-top:0; padding-top:0;">
 
 <form id="requestForm">
 
 <!-- Row with all boxes side by side -->
 <div class="row" 
-     style="display:flex; flex-wrap:nowrap; justify-content:space-between; align-items:flex-start; margin-bottom:1em; border-bottom:2px solid #ccc; padding-bottom:10px;">
+     style="display:flex; flex-wrap:nowrap; justify-content:space-between; align-items:stretch; margin-bottom:1em; border-bottom:2px solid #ccc; padding-bottom:10px;">
 
-  <!-- Previous Requisition No -->
-  <div style="flex:1; min-width:0; margin-right:10px;">
-    <label for="previousReq">Requisition No</label>
-    <div id="previousReq" 
-         style="border:1px solid #ccc; padding:3px; border-radius:4px; height:30px;">
-      <!-- Submission numbers will appear here -->
+  <!-- Requisition No -->
+  <div style="flex:1; min-width:0; margin-right:10px; display:flex; flex-direction:column;">
+    <label for="reqNo">Requisition No</label>
+    <div style="border:1px solid #ccc; padding:3px; border-radius:4px; height:30px; display:flex; align-items:center; box-sizing:border-box;">
+      <input type="text" id="reqNo" readonly 
+             style="border:none; outline:none; flex:1; height:100%; padding-left:5px;">
     </div>
   </div>
 
   <!-- Search Requisition Number -->
-  <div style="flex:1; min-width:0; margin-right:10px;">
+  <div style="flex:1; min-width:0; margin-right:10px; display:flex; flex-direction:column;">
     <label for="searchNumber">Search Requisition Number</label>
     <div id="searchBox" 
-         style="border:1px solid #ccc; padding:3px; border-radius:4px; height:30px; display:flex; align-items:center; justify-content:space-between;">
+         style="border:1px solid #ccc; padding:3px; border-radius:4px; height:30px; display:flex; align-items:center; justify-content:space-between; box-sizing:border-box;">
       <input type="number" id="searchNumber" placeholder="Enter number" 
              style="border:none; outline:none; flex:1; height:100%; padding-left:5px;">
       <button type="button" onclick="searchSubmission()" 
-              style="border:none; background:#eee; border-radius:4px; height:100%; padding:0 10px; margin-left:5px; cursor:pointer;">
+              style="border:none; background:#eee; border-radius:4px; height:100%; padding:0 12px; margin-left:5px; cursor:pointer;">
         Search
       </button>
     </div>
   </div>
 
   <!-- Search by Date -->
-  <div style="flex:1; min-width:0;">
+  <div style="flex:1; min-width:0; display:flex; flex-direction:column;">
     <label for="searchDate">Search by Date</label>
     <div id="searchDateBox" 
-         style="border:1px solid #ccc; padding:3px; border-radius:4px; height:30px; display:flex; align-items:center; justify-content:space-between;">
+         style="border:1px solid #ccc; padding:3px; border-radius:4px; height:30px; display:flex; align-items:center; justify-content:space-between; box-sizing:border-box;">
       <input type="date" id="searchDate" 
              style="border:none; outline:none; flex:1; height:100%; padding-left:5px;">
       <button type="button" onclick="searchByDate()" 
-              style="border:none; background:#eee; border-radius:4px; height:100%; padding:0 10px; margin-left:5px; cursor:pointer;">
+              style="border:none; background:#eee; border-radius:4px; height:100%; padding:0 12px; margin-left:5px; cursor:pointer;">
         Search
       </button>
     </div>
@@ -321,7 +323,7 @@ button[type="submit"]:hover {
   <div style="flex:1;">
     <label for="timestamp">Date & Time</label>
     <input type="datetime-local" id="timestamp" name="timestamp" 
-           style="border:1px solid #ccc; padding:3px; border-radius:4px; height:30px; width:100%;">
+           style="border:1px solid #ccc; padding:3px; border-radius:4px; height:36px; width:100%;">
   </div>
 </div>
 
@@ -947,19 +949,27 @@ button[type="submit"]:hover {
     <h2>Select Items</h2>  <!-- ✅ Add Item Button now inside the form -->
   <button type="button" id="addItemBtn">➕ Add Item</button>
 
-    <div id="itemContainer"></div>
-    <label for="fileUpload">Upload File:</label>
-    <input type="file" id="fileUpload" name="fileUpload">
-    <div class="note-section">
-      <label for="note">Additional Note:</label>
-      <textarea id="note" name="note" placeholder="Enter any special instructions or notes here..." rows="4" cols="50"></textarea>
-    </div>
-    <div class="button-group">
-      <button type="reset">Reset</button>
-      <button type="submit">Submit</button>
-    </div>
-  </form>
+<div id="itemContainer"></div>
+<label for="fileUpload">Upload File:</label>
+<input type="file" id="fileUpload" name="fileUpload">
+<div class="note-section">
+  <label for="additionalNote">Additional Note:</label>
+  <textarea id="additionalNote" name="additionalNote" placeholder="Enter any special instructions or notes here..." rows="4" cols="50"></textarea>
+</div>
+<div class="button-group">
+  <button type="reset">Reset</button>
+  <button type="submit">Submit</button>
+</div>
+</form>
 <script>
+  // ✅ Additional Note textarea খালি করো
+  const noteField = document.getElementById("additionalNote");
+  if (noteField) {
+    noteField.value = "";
+    noteField.style.backgroundColor = "";
+    noteField.style.border = "";
+  }
+
 const itemOptions = [
   "R170014 - JUICE PINEAPPLE 1LT",
   "R170133 - JUICE GRAPE TETRA PACK",
@@ -1788,102 +1798,106 @@ itemOptions.push(
   "P040571-VIP BOX TOP AND BOTTOM TYPE",
 );
 
-  const quantityTypes = ["Pcs", "Box", "Carton", "Pack", "Bottle"];
-  const container = document.getElementById("itemContainer");
+const quantityTypes = ["Pcs", "Box", "Carton", "Pack", "Bottle"];
+const container = document.getElementById("itemContainer");
 
-  const datalist = document.createElement("datalist");
-  datalist.id = "itemList";
-  itemOptions.forEach(item => {
-    const option = document.createElement("option");
-    option.value = item;
-    datalist.appendChild(option);
-  });
-  document.body.appendChild(datalist);
+const datalist = document.createElement("datalist");
+datalist.id = "itemList";
+itemOptions.forEach(item => {
+  const option = document.createElement("option");
+  option.value = item;
+  datalist.appendChild(option);
+});
+document.body.appendChild(datalist);
 
-  function createItemRow(index) {
-    const row = document.createElement("div");
-    row.className = "item-row";
-    row.style.display = "flex";
-    row.style.gap = "4px";
-    row.style.alignItems = "center";
-    row.style.marginBottom = "4px";
+function createItemRow(index) {
+  const row = document.createElement("div");
+  row.className = "item-row";
+  row.style.display = "flex";
+  row.style.gap = "4px";
+  row.style.alignItems = "center";
+  row.style.marginBottom = "4px";
 
-    const itemInput = document.createElement("input");
-    itemInput.setAttribute("list", "itemList");
-    itemInput.name = "itemDetails[]";
-    itemInput.placeholder = `Select Item ${index + 1}`;
-    itemInput.style.flex = "2";
+  const itemInput = document.createElement("input");
+  itemInput.setAttribute("list", "itemList");
+  itemInput.name = "itemDetails[]";
+  itemInput.placeholder = `Select Item ${index + 1}`;
+  itemInput.style.flex = "2";
+  itemInput.style.height = "32px";   // ✅ same height
 
-    const quantityInput = document.createElement("input");
-    quantityInput.type = "number";
-    quantityInput.name = "quantity[]";
-    quantityInput.placeholder = "Qty";
-    quantityInput.min = "1";
-    quantityInput.style.flex = "1";
+  const quantityInput = document.createElement("input");
+  quantityInput.type = "number";
+  quantityInput.name = "quantity[]";
+  quantityInput.placeholder = "Qty";
+  quantityInput.min = "1";
+  quantityInput.style.flex = "1";
+  quantityInput.style.height = "32px";   // ✅ same height
 
-    const quantityTypeSelect = document.createElement("select");
-    quantityTypeSelect.name = "quantityType[]";
-    quantityTypeSelect.innerHTML = `<option value="">Select--></option>` +
-      quantityTypes.map(type => `<option value="${type}">${type}</option>`).join('');
-    quantityTypeSelect.style.flex = "1";
+  const quantityTypeSelect = document.createElement("select");
+  quantityTypeSelect.name = "quantityType[]";
+  quantityTypeSelect.innerHTML = `<option value="">Select--></option>` +
+    quantityTypes.map(type => `<option value="${type}">${type}</option>`).join('');
+  quantityTypeSelect.style.flex = "1";
+  quantityTypeSelect.style.height = "32px";   // ✅ same height
 
-    const deleteBtn = document.createElement("button");
-    deleteBtn.type = "button";
-    deleteBtn.textContent = "Delete";
-    deleteBtn.style.flex = "0";
-    deleteBtn.style.padding = "3.5px 6px";
-    deleteBtn.style.cursor = "pointer";
-    deleteBtn.onclick = () => row.remove();
+  const deleteBtn = document.createElement("button");
+  deleteBtn.type = "button";
+  deleteBtn.textContent = "Delete";
+  deleteBtn.style.flex = "0";
+  deleteBtn.style.padding = "3.5px 6px";
+  deleteBtn.style.cursor = "pointer";
+  deleteBtn.style.height = "28px";   // ✅ same height
+  deleteBtn.onclick = () => row.remove();
 
-    row.appendChild(itemInput);
-    row.appendChild(quantityInput);
-    row.appendChild(quantityTypeSelect);
-    row.appendChild(deleteBtn);
-    container.appendChild(row);
+  row.appendChild(itemInput);
+  row.appendChild(quantityInput);
+  row.appendChild(quantityTypeSelect);
+  row.appendChild(deleteBtn);
+  container.appendChild(row);
 
-    applyLiveBorderStyling();
-  }
+  applyLiveBorderStyling();
+}
 
-  for (let i = 0; i < 12; i++) {
-    createItemRow(i);
-  }
+for (let i = 0; i < 12; i++) {
+  createItemRow(i);
+}
 
-  document.getElementById("addItemBtn").addEventListener("click", () => {
-    const currentRows = container.querySelectorAll(".item-row").length;
-    createItemRow(currentRows);
-  });
+document.getElementById("addItemBtn").addEventListener("click", () => {
+  const currentRows = container.querySelectorAll(".item-row").length;
+  createItemRow(currentRows);
+});
 
-  function applyLiveBorderStyling() {
-    const itemRows = container.querySelectorAll(".item-row");
+function applyLiveBorderStyling() {
+  const itemRows = container.querySelectorAll(".item-row");
 
-    itemRows.forEach((row) => {
-      const itemInput = row.querySelector('input[name="itemDetails[]"]');
-      const qtyInput = row.querySelector('input[name="quantity[]"]');
-      const uomSelect = row.querySelector('select[name="quantityType[]"]');
+  itemRows.forEach((row) => {
+    const itemInput = row.querySelector('input[name="itemDetails[]"]');
+    const qtyInput = row.querySelector('input[name="quantity[]"]');
+    const uomSelect = row.querySelector('select[name="quantityType[]"]');
 
-      itemInput.addEventListener("input", () => {
-        itemInput.style.border = itemInput.value.trim() !== "" ? "2px solid green" : "";
-      });
-
-      qtyInput.addEventListener("input", () => {
-        if (qtyInput.value.trim() !== "") {
-          qtyInput.style.border = "2px solid green";
-          uomSelect.style.border = uomSelect.value.trim() === "" ? "2px solid red" : "2px solid green";
-        } else {
-          qtyInput.style.border = "";
-          uomSelect.style.border = "";
-        }
-      });
-
-      uomSelect.addEventListener("input", () => {
-        if (qtyInput.value.trim() !== "") {
-          uomSelect.style.border = uomSelect.value.trim() === "" ? "2px solid red" : "2px solid green";
-        } else {
-          uomSelect.style.border = "";
-        }
-      });
+    itemInput.addEventListener("input", () => {
+      itemInput.style.border = itemInput.value.trim() !== "" ? "2px solid green" : "";
     });
-  }
+
+    qtyInput.addEventListener("input", () => {
+      if (qtyInput.value.trim() !== "") {
+        qtyInput.style.border = "2px solid green";
+        uomSelect.style.border = uomSelect.value.trim() === "" ? "2px solid red" : "2px solid green";
+      } else {
+        qtyInput.style.border = "";
+        uomSelect.style.border = "";
+      }
+    });
+
+    uomSelect.addEventListener("input", () => {
+      if (qtyInput.value.trim() !== "") {
+        uomSelect.style.border = uomSelect.value.trim() === "" ? "2px solid red" : "2px solid green";
+      } else {
+        uomSelect.style.border = "";
+      }
+    });
+  });
+}
 
   document.getElementById("requestForm").addEventListener("reset", () => {
     setTimeout(() => {
@@ -2072,7 +2086,7 @@ itemOptions.push(
       }
     });
 
-  fetch("https://script.google.com/macros/s/AKfycbwDaz4iydD85j-iPMMQEcRFmJzl-2WVPe8ZDuhe3FqpZIi_0UpYmOgSIRKOV9SSkaRA-w/exec", {
+  fetch("https://script.google.com/macros/s/AKfycbwqELWGXmA5Czj-qr-ggYeKZ0EafYVVG4ixh3E8KGfZzkAVhVC3ABPg_GGJ70LwliIDkQ/exec", {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded"
@@ -2107,26 +2121,74 @@ itemOptions.push(
       formWrapper.style.position = "relative";
       formWrapper.appendChild(successMessage);
 
-      // ✅ নতুন সাবমিশন Req নম্বর যোগ করো
-  const newReqNo = String(submissions.length + 1).padStart(5, "0"); // 00001, 00002, ...
-  const today = new Date().toISOString().split("T")[0];
-      submissions.push({ reqNo: newReqNo, date: today, data: "Data for " + newReqNo });
-      showLatestReq();
+setTimeout(() => {
+  successMessage.remove();
+  progressBar.style.width = "0%";
+  progressText.textContent = "0%";
+  submitBtn.textContent = "Submit";
 
-      setTimeout(() => {
-        successMessage.remove();
-        progressBar.style.width = "0%";
-        progressText.textContent = "0%";
-        submitBtn.textContent = "Submit";
+  const allFields = formWrapper.querySelectorAll("input, select");
+  allFields.forEach(field => {
+    // reqNo বাদে সব ফিল্ড খালি করো
+    if (field.id !== "reqNo") {
+      field.value = "";
+    }
+    field.style.backgroundColor = "";
+    field.style.border = "";
+  });
 
-        const allFields = formWrapper.querySelectorAll("input, select");
-        allFields.forEach(field => {
-          field.value = "";
-          field.style.backgroundColor = "";
-          field.style.border = "";
-        });
-      }, 4000);
-    })
+  // ✅ Additional Note textarea খালি করো
+  const noteField = document.getElementById("additionalNote");
+  if (noteField) {
+    noteField.value = "";
+    noteField.style.backgroundColor = "";
+    noteField.style.border = "";
+  }
+
+  // ✅ নতুন Req No তৈরি করে Req Box এ দেখাও
+  const newReqNo = generateReqNo();
+  document.getElementById("reqNo").value = newReqNo;
+
+  // submissions আপডেট করো
+  submissions.push({
+    reqNo: newReqNo,
+    date: new Date().toISOString().split("T")[0]
+  });
+  localStorage.setItem("submissions", JSON.stringify(submissions));
+
+  if (document.getElementById("previousReq")) {
+    document.getElementById("previousReq").textContent = newReqNo;
+  }
+
+  // ✅ Google Sheet এ Req No পাঠাও (ফর্মে যা আছে সেটাই যাবে)
+  const formData = new URLSearchParams();
+  formData.append("reqNo", newReqNo);
+
+  // অন্য ফিল্ডগুলোও পাঠাও
+  const allFieldsForPayload = formWrapper.querySelectorAll("input, select, textarea");
+  allFieldsForPayload.forEach(field => {
+    if (field.id !== "reqNo") {
+      formData.append(field.name, field.value);
+    }
+  });
+
+  fetch("https://script.google.com/macros/s/AKfycbwqELWGXmA5Czj-qr-ggYeKZ0EafYVVG4ixh3E8KGfZzkAVhVC3ABPg_GGJ70LwliIDkQ/exec", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: formData.toString()
+  })
+  .then(res => res.text())
+  .then(data => {
+    console.log("Req No saved to Google Sheet:", newReqNo);
+  })
+  .catch(err => {
+    console.error("Error saving Req No:", err);
+  });
+
+}, 4000);
+})
     .catch(error => {
       clearInterval(interval);
       const errorMessage = document.createElement("div");
@@ -2176,113 +2238,332 @@ itemOptions.push(
 // ---------------- My Requisition Script ----------------
 let submissions = JSON.parse(localStorage.getItem("submissions")) || [];
 
-// ✅ সর্বশেষ Req নম্বর দেখাও
+// ---------------- Extra Requisition Generator ----------------
+
+// আজকের তারিখ YYMMDD ফরম্যাটে বের করার ফাংশন
+function getYYMMDD(date = new Date()) {
+  const yy = String(date.getFullYear()).slice(-2);
+  const mm = String(date.getMonth() + 1).padStart(2, '0');
+  const dd = String(date.getDate()).padStart(2, '0');
+  return yy + mm + dd;
+}
+
+// নতুন Req No তৈরি করার ফাংশন (yymmdd+serial)
+function generateReqNo() {
+  const today = getYYMMDD();
+  const todaySubs = submissions.filter(s => s.date === new Date().toISOString().split("T")[0]);
+  const serial = todaySubs.length + 1;
+  return today + String(serial);
+}
+
+// ✅ সর্বশেষ Req নম্বর দেখাও (localStorage থেকে)
 function showLatestReq() {
   if (submissions.length === 0) {
-    document.getElementById("previousReq").textContent = "No submissions yet";
+    document.getElementById("reqNo").value = "No submissions yet";
+    if (document.getElementById("previousReq")) {
+      document.getElementById("previousReq").textContent = "No submissions yet";
+    }
     return;
   }
   const latest = submissions[submissions.length - 1];
-  document.getElementById("previousReq").textContent = latest.reqNo;
+  document.getElementById("reqNo").value = latest.reqNo;
+  if (document.getElementById("previousReq")) {
+    document.getElementById("previousReq").textContent = latest.reqNo;
+  }
 }
 
-// ✅ ফর্মে ডেটা বসানোর জন্য আলাদা ফাংশন
+// ✅ সর্বশেষ Req নম্বর দেখাও (Google Sheet থেকে)
+function showLatestReqFromSheet() {
+  fetch("https://script.google.com/macros/s/AKfycbwqELWGXmA5Czj-qr-ggYeKZ0EafYVVG4ixh3E8KGfZzkAVhVC3ABPg_GGJ70LwliIDkQ/exec")
+    .then(res => res.json())
+    .then(data => {
+      if (data && data.length > 0) {
+        const lastRow = data[data.length - 1]; // সর্বশেষ row
+        document.getElementById("reqNo").value = lastRow.requisition || lastRow.reqNo;
+        if (document.getElementById("previousReq")) {
+          document.getElementById("previousReq").textContent = lastRow.requisition || lastRow.reqNo;
+        }
+      } else {
+        document.getElementById("reqNo").value = "No submissions yet";
+      }
+    })
+    .catch(err => {
+      console.error("Error fetching last requisition:", err);
+      document.getElementById("reqNo").value = "Error loading number";
+    });
+}
+
+// নতুন Req No তৈরি করো
+const newReqNo = generateReqNo();
+
+// submissions অ্যারেতে যোগ করো
+submissions.push({
+  reqNo: newReqNo,
+  date: new Date().toISOString().split("T")[0]
+});
+
+// localStorage এ সেভ করো
+localStorage.setItem("submissions", JSON.stringify(submissions));
+
+// ফর্মে Req No দেখাও
+document.getElementById("reqNo").value = newReqNo;
+if (document.getElementById("previousReq")) {
+  document.getElementById("previousReq").textContent = newReqNo;
+}
+
+// ✅ ফর্মে ডেটা বসাও
 function fillForm(data) {
   document.getElementById("dateTime").value = data.dateTime || "";
-  document.getElementById("requestFor").value = data.requestFor || "";
-  document.getElementById("airlineCode").value = data.airlineCode || "";
+  document.getElementById("requestFor").value = data.requestFor || "";   // ✅ Request For
+  document.getElementById("airlineCodeBox").value = data.airlineCodeBox || ""; // ✅ Airline Code / EKFC
   document.getElementById("flightNo").value = data.flightNo || "";
   document.getElementById("erpNo").value = data.erpNo || "";
   document.getElementById("requestedByName").value = data.requestedByName || "";
   document.getElementById("reason").value = data.reason || "";
   document.getElementById("approvedBy").value = data.approvedBy || "";
   document.getElementById("additionalNote").value = data.additionalNote || "";
+  document.getElementById("selectItems").value = data.item || "";
+  document.getElementById("qty").value = data.quantity || "";
+  document.getElementById("unit").value = data.type || "";
+  document.getElementById("reqNo").value = data.reqNo || data.requisition || "";
 }
 
-// ✅ Search by requisition number → ফর্মে আগের মতো ডেটা বসবে
-function searchSubmission() {
-  const input = document.getElementById("searchNumber").value.trim();
-  const searchNo = input.padStart(5, "0");
+// আজকের তারিখ ddmmyy ফরম্যাটে বের করো
+function getDDMMYY() {
+  const d = new Date();
+  const dd = String(d.getDate()).padStart(2, "0");
+  const mm = String(d.getMonth() + 1).padStart(2, "0");
+  const yy = String(d.getFullYear()).slice(-2);
+  return dd + mm + yy; // যেমন 291125
+}
 
-  const match = submissions.find(s => s.reqNo === searchNo);
-
-  if (!match) {
-    document.getElementById("searchMessage").textContent = "No data found";
-    return;
-  }
-
-  fillForm(match.data);
-  document.getElementById("itemsContainer").innerHTML = `
-    <label>Item: </label>
-    <input type="text" value="${match.data.selectItems || ""}" />
-    <label>Qty: </label>
-    <input type="text" value="${match.data.qty || ""}" />
-    <label>Unit: </label>
-    <input type="text" value="${match.data.unit || ""}" />
-  `;
-  document.getElementById("searchMessage").textContent = "Data loaded into form";
+// নতুন Req No তৈরি করার ফাংশন (yymmdd+serial)
+function generateReqNo() {
+  const today = getYYMMDD();
+  const todaySubs = submissions.filter(s => s.date === new Date().toISOString().split("T")[0]);
+  const serial = todaySubs.length + 1;
+  return today + String(serial).padStart(2, "0"); // সিরিয়াল দুই ডিজিটে চাইলে padStart ব্যবহার করো
 }
 
 // ✅ নতুন submission সেভ করো
 function addNewSubmission() {
-  const newReqNo = String(submissions.length + 1).padStart(5, "0");
+  const newReqNo = generateReqNo();
+  document.getElementById("requisitionNo").value = newReqNo;
   const today = new Date().toISOString().split("T")[0];
-
   const details = {
     dateTime: document.getElementById("dateTime").value,
     requestFor: document.getElementById("requestFor").value,
-    airlineCode: document.getElementById("airlineCode").value,
+    airlineCodeBox: document.getElementById("airlineCode").value,   // ✅ Airline Code / EKFC
     flightNo: document.getElementById("flightNo").value,
-    erpNo: document.getElementById("erpNo").value,
+    requestedByERP: document.getElementById("erpno").value,   // ✅ ERP No (HTML id/name="requestedByERP")
     requestedByName: document.getElementById("requestedByName").value,
-    reason: document.getElementById("reason").value,
+    reasonForRequest: document.getElementById("reason").value, // ✅ Reason For Request (HTML id/name="reasonForRequest")
     approvedBy: document.getElementById("approvedBy").value,
-    selectItems: document.getElementById("selectItems")?.value || "",
-    qty: document.getElementById("qty")?.value || "",
-    unit: document.getElementById("unit")?.value || "",
-    additionalNote: document.getElementById("additionalNote").value
+    item: document.getElementById("selectItems")?.value || "",
+    quantity: document.getElementById("qty")?.value || "",
+    type: document.getElementById("unit")?.value || "",
+    additionalNote: document.getElementById("additionalNote").value,
+    requisition: newReqNo
   };
 
-  submissions.push({
-    reqNo: newReqNo,
-    date: today,
-    data: details
-  });
-
+  // local submissions array এ push করো
+  submissions.push({ reqNo: newReqNo, date: today, data: details });
   localStorage.setItem("submissions", JSON.stringify(submissions));
-  showLatestReq();
 }
 
-// ✅ Search by date → একই দিনে সব submission ফর্মে row আকারে বসবে
+// ✅ Search by requisition number → Google Sheet থেকে ডেটা আনবে
+function searchSubmission() {
+  const input = document.getElementById("searchNumber").value.trim();
+  const searchNo = input.padStart(5, "0");
+
+  fetch("https://script.google.com/macros/s/AKfycbwqELWGXmA5Czj-qr-ggYeKZ0EafYVVG4ixh3E8KGfZzkAVhVC3ABPg_GGJ70LwliIDkQ/exec" + searchNo)
+    .then(res => res.json())
+    .then(data => {
+      if (!data || data.length === 0) {
+        document.getElementById("searchMessage").textContent = "No data found in Google Sheet";
+        return;
+      }
+      fillForm(data[0]);
+      let html = "";
+      data.forEach((row, i) => {
+        html += `
+          <div>
+            <label>Item ${i+1}: </label>
+            <input type="text" value="${row.item || ""}" />
+            <label>Qty: </label>
+            <input type="text" value="${row.quantity || ""}" />
+            <label>Unit: </label>
+            <input type="text" value="${row.unit || ""}" />
+            <label>Req No: </label>
+            <input type="text" value="${row.requisition || ""}" />
+          </div>
+        `;
+      });
+      document.getElementById("itemsContainer").innerHTML = html;
+      document.getElementById("searchMessage").textContent = "Data loaded from Google Sheet";
+    })
+    .catch(err => {
+      document.getElementById("searchMessage").textContent = "Error: " + err;
+    });
+}
+
+// ✅ Search by date → Google Sheet থেকে ডেটা আনবে
 function searchByDate() {
   const dateVal = document.getElementById("searchDate").value;
-  const matches = submissions.filter(s => s.date === dateVal);
-
-  const container = document.getElementById("itemsContainer");
-  container.innerHTML = "";
-
-  if (matches.length === 0) {
-    document.getElementById("searchMessage").textContent = "No submissions on this date";
-    return;
-  }
-
-  matches.forEach((s, index) => {
-    const data = s.data;
-    const row = document.createElement("div");
-    row.style.marginBottom = "8px";
-    row.innerHTML = `
-      <label>Item ${index + 1}: </label>
-      <input type="text" value="${data.selectItems || ""}" style="width:150px;" />
-      <label>Qty: </label>
-      <input type="text" value="${data.qty || ""}" style="width:60px;" />
-      <label>Unit: </label>
-      <input type="text" value="${data.unit || ""}" style="width:80px;" />
-    `;
-    container.appendChild(row);
-  });
-
-  document.getElementById("searchMessage").textContent = "All submissions for this date loaded into form";
+  fetch("https://script.google.com/macros/s/AKfycbwqELWGXmA5Czj-qr-ggYeKZ0EafYVVG4ixh3E8KGfZzkAVhVC3ABPg_GGJ70LwliIDkQ/exec" + dateVal)
+    .then(res => res.json())
+    .then(data => {
+      const container = document.getElementById("itemsContainer");
+      container.innerHTML = "";
+      if (!data || data.length === 0) {
+        document.getElementById("searchMessage").textContent = "No submissions on this date";
+        return;
+      }
+      data.forEach((row, index) => {
+        const div = document.createElement("div");
+        div.style.marginBottom = "8px";
+        div.innerHTML = `
+          <label>Item ${index + 1}: </label>
+          <input type="text" value="${row.item || ""}" style="width:150px;" />
+          <label>Qty: </label>
+          <input type="text" value="${row.quantity || ""}" style="width:60px;" />
+          <label>Unit: </label>
+          <input type="text" value="${row.unit || ""}" style="width:80px;" />
+          <label>Req No: </label>
+          <input type="text" value="${row.requisition || ""}" style="width:80px;" />
+        `;
+        container.appendChild(div);
+      });
+      document.getElementById("searchMessage").textContent = "All submissions for this date loaded from Google Sheet";
+    })
+    .catch(err => {
+      document.getElementById("searchMessage").textContent = "Error: " + err;
+    });
 }
 
-window.onload = showLatestReq;
+// ✅ Submit handler (Google Sheet এ পাঠাবে + localStorage এ সেভ করবে)
+function submitToSheet() {
+  const payload = new URLSearchParams({
+    dateTime: document.getElementById("dateTime").value,
+    requestFor: document.getElementById("requestFor").value,
+    airlineCodeBox: document.getElementById("airlineCodeBox").value,
+    flightNo: document.getElementById("flightNo").value,
+    requestedByERP: document.getElementById("requestedByERP").value,
+    requestedByName: document.getElementById("requestedByName").value,
+    reasonForRequest: document.getElementById("reasonForRequest").value,
+    approvedBy: document.getElementById("approvedBy").value,
+    item: document.getElementById("selectItems").value,
+    quantity: document.getElementById("qty").value,
+    type: document.getElementById("unit").value,
+    additionalNote: document.getElementById("additionalNote").value,
+    requisition: document.getElementById("requisitionNo").value
+  });
+
+  fetch("https://script.google.com/macros/s/AKfycbwqELWGXmA5Czj-qr-ggYeKZ0EafYVVG4ixh3E8KGfZzkAVhVC3ABPg_GGJ70LwliIDkQ/exec", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: payload
+  })
+    .then(response => response.text())
+    .then(result => {
+      clearInterval(interval);
+      progressBar.style.width = "100%";
+      progressText.textContent = "100%";
+      submitBtn.textContent = "Submitted ✅";
+      submitBtn.classList.remove("processing");
+
+      const successMessage = document.createElement("div");
+      successMessage.textContent = "✅ Your request has been submitted successfully!";
+      successMessage.style.position = "absolute";
+      successMessage.style.top = "50%";
+      successMessage.style.left = "50%";
+      successMessage.style.transform = "translate(-50%, -50%)";
+      successMessage.style.backgroundColor = "#34d399";
+      successMessage.style.color = "#fff";
+      successMessage.style.padding = "1em 2em";
+      successMessage.style.borderRadius = "8px";
+      successMessage.style.boxShadow = "0 4px 12px rgba(0,0,0,0.2)";
+      successMessage.style.zIndex = "1000";
+      successMessage.style.fontSize = "1.4em";
+      successMessage.style.fontWeight = "bold";
+      successMessage.style.textAlign = "center";
+
+      const formWrapper = document.getElementById("requestForm");
+      formWrapper.style.position = "relative";
+      formWrapper.appendChild(successMessage);
+
+      // ✅ localStorage এও সেভ করো
+      addNewSubmission();
+
+      // সর্বশেষ নম্বর সেভ করো
+      localStorage.setItem("lastReqNo", document.getElementById("requisitionNo").value);
+
+      // 🔧 নতুন লাইন যোগ করা হলো → বক্সে আবার বসাও
+      document.getElementById("requisitionNo").value = localStorage.getItem("lastReqNo");
+
+      setTimeout(() => {
+        successMessage.remove();
+        progressBar.style.width = "0%";
+        progressText.textContent = "0%";
+        submitBtn.textContent = "Submit";
+
+// ফর্ম ক্লিয়ার করার সময়
+allFields.forEach(field => {
+  if (field.id !== "requisitionNo") {   // এখানে requisitionNo ব্যবহার করো
+    field.value = "";
+    field.style.backgroundColor = "";
+    field.style.border = "";
+  }
+});
+
+// নতুন নম্বর বসানোর সময়
+document.getElementById("requisitionNo").value = generateReqNo();
+
+      }, 4000);
+    })
+    .catch(error => {
+      clearInterval(interval);
+      const errorMessage = document.createElement("div");
+      errorMessage.textContent = "❌ Submission failed: " + error;
+      errorMessage.style.position = "absolute";
+      errorMessage.style.top = "50%";
+      errorMessage.style.left = "50%";
+      errorMessage.style.transform = "translate(-50%, -50%)";
+      errorMessage.style.backgroundColor = "#ef4444";
+      errorMessage.style.color = "#fff";
+      errorMessage.style.padding = "1em 2em";
+      errorMessage.style.borderRadius = "8px";
+      errorMessage.style.boxShadow = "0 4px 12px rgba(0,0,0,0.2)";
+      errorMessage.style.zIndex = "1000";
+      errorMessage.style.fontSize = "1.4em";
+      errorMessage.style.fontWeight = "bold";
+      errorMessage.style.textAlign = "center";
+
+      const formWrapper = document.getElementById("requestForm");
+      formWrapper.style.position = "relative";
+      formWrapper.appendChild(errorMessage);
+
+      submitBtn.textContent = "Submit";
+      submitBtn.classList.remove("processing");
+      progressBar.style.width = "0%";
+      progressText.textContent = "0%";
+    });
+}
+
+// ✅ লোডের সময় Requisition No সবসময় সর্বশেষ দেখাবে
+window.onload = function() {
+  const lastReqNo = localStorage.getItem("lastReqNo");
+  if (lastReqNo) {
+    document.getElementById("requisitionNo").value = lastReqNo;
+  } else {
+    const newReqNo = generateReqNo();
+    document.getElementById("requisitionNo").value = newReqNo;
+    // নতুন Req No কে localStorage এ সেভ করো
+    localStorage.setItem("lastReqNo", newReqNo);
+  }
+  if (document.getElementById("previousReq")) {
+    document.getElementById("previousReq").textContent =
+      document.getElementById("requisitionNo").value;
+  }
+};
 </script>
