@@ -1812,7 +1812,7 @@ document.body.appendChild(datalist);
 
 function createItemRow(index) {
   const row = document.createElement("div");
-  row.className = "item-row";
+  row.className = "item-row";   // ✅ এখানে ক্লাস যোগ করা হলো
   row.style.display = "flex";
   row.style.gap = "4px";
   row.style.alignItems = "center";
@@ -1828,14 +1828,16 @@ function createItemRow(index) {
   const quantityInput = document.createElement("input");
   quantityInput.type = "number";
   quantityInput.name = "quantity[]";
-  quantityInput.placeholder = "Qty";
+  // ✅ Qty placeholder serial like Qty 1, Qty 2
+  quantityInput.placeholder = `Select Qty ${index + 1}`;
   quantityInput.min = "1";
   quantityInput.style.flex = "1";
   quantityInput.style.height = "32px";   // ✅ same height
 
   const quantityTypeSelect = document.createElement("select");
   quantityTypeSelect.name = "quantityType[]";
-  quantityTypeSelect.innerHTML = `<option value="">Select--></option>` +
+  // ✅ UOM placeholder serial like UOM 1, UOM 2
+  quantityTypeSelect.innerHTML = `<option value="">UOM ${index + 1}</option>` +
     quantityTypes.map(type => `<option value="${type}">${type}</option>`).join('');
   quantityTypeSelect.style.flex = "1";
   quantityTypeSelect.style.height = "32px";   // ✅ same height
@@ -2086,7 +2088,7 @@ function applyLiveBorderStyling() {
       }
     });
 
-  fetch("https://script.google.com/macros/s/AKfycbwqELWGXmA5Czj-qr-ggYeKZ0EafYVVG4ixh3E8KGfZzkAVhVC3ABPg_GGJ70LwliIDkQ/exec", {
+  fetch("https://script.google.com/macros/s/AKfycbzvKCkOoIVDv7UbXjrgCqSRvSq5j7BYswl2y35GMPZxE03h13EIDmmA6VKhgBfLrUYuyw/exec", {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded"
@@ -2172,7 +2174,7 @@ setTimeout(() => {
     }
   });
 
-  fetch("https://script.google.com/macros/s/AKfycbwqELWGXmA5Czj-qr-ggYeKZ0EafYVVG4ixh3E8KGfZzkAVhVC3ABPg_GGJ70LwliIDkQ/exec", {
+  fetch("https://script.google.com/macros/s/AKfycbzvKCkOoIVDv7UbXjrgCqSRvSq5j7BYswl2y35GMPZxE03h13EIDmmA6VKhgBfLrUYuyw/exec", {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded"
@@ -2238,6 +2240,32 @@ setTimeout(() => {
 // ---------------- My Requisition Script ----------------
 let submissions = JSON.parse(localStorage.getItem("submissions")) || [];
 
+// ---------------- Utility Functions ----------------
+function buildPayloadFromRows() {
+  const rows = document.querySelectorAll(".item-row");
+  const payload = new URLSearchParams();
+  const items = [];
+
+  rows.forEach((row) => {
+    const item = row.querySelector('input[name="itemDetails[]"]').value.trim();
+    const qty  = row.querySelector('input[name="quantity[]"]').value.trim();
+    const uom  = row.querySelector('select[name="quantityType[]"]').value.trim();
+
+    if (item) {
+      items.push({ item, qty: qty || "?", uom: uom || "?" });
+    }
+  });
+
+  [
+    "timestamp","requestFor","airlineCodeBox","flightNo",
+    "requestedByERP","requestedByName","reasonForRequest",
+    "approvedBy","additionalNote"
+  ].forEach(id => payload.append(id, document.getElementById(id)?.value || ""));
+
+  payload.append("items", JSON.stringify(items));
+  return payload;
+}
+
 // ---------------- Extra Requisition Generator ----------------
 
 // আজকের তারিখ YYMMDD ফরম্যাটে বের করার ফাংশন
@@ -2274,7 +2302,7 @@ function showLatestReq() {
 
 // ✅ সর্বশেষ Req নম্বর দেখাও (Google Sheet থেকে)
 function showLatestReqFromSheet() {
-  fetch("https://script.google.com/macros/s/AKfycbwqELWGXmA5Czj-qr-ggYeKZ0EafYVVG4ixh3E8KGfZzkAVhVC3ABPg_GGJ70LwliIDkQ/exec")
+  fetch("https://script.google.com/macros/s/AKfycbzvKCkOoIVDv7UbXjrgCqSRvSq5j7BYswl2y35GMPZxE03h13EIDmmA6VKhgBfLrUYuyw/exec")
     .then(res => res.json())
     .then(data => {
       if (data && data.length > 0) {
@@ -2376,7 +2404,7 @@ function searchSubmission() {
   const input = document.getElementById("searchNumber").value.trim();
   const searchNo = input.padStart(5, "0");
 
-  fetch("https://script.google.com/macros/s/AKfycbwqELWGXmA5Czj-qr-ggYeKZ0EafYVVG4ixh3E8KGfZzkAVhVC3ABPg_GGJ70LwliIDkQ/exec" + searchNo)
+  fetch("https://script.google.com/macros/s/AKfycbzvKCkOoIVDv7UbXjrgCqSRvSq5j7BYswl2y35GMPZxE03h13EIDmmA6VKhgBfLrUYuyw/exec" + searchNo)
     .then(res => res.json())
     .then(data => {
       if (!data || data.length === 0) {
@@ -2410,7 +2438,7 @@ function searchSubmission() {
 // ✅ Search by date → Google Sheet থেকে ডেটা আনবে
 function searchByDate() {
   const dateVal = document.getElementById("searchDate").value;
-  fetch("https://script.google.com/macros/s/AKfycbwqELWGXmA5Czj-qr-ggYeKZ0EafYVVG4ixh3E8KGfZzkAVhVC3ABPg_GGJ70LwliIDkQ/exec" + dateVal)
+  fetch("https://script.google.com/macros/s/AKfycbzvKCkOoIVDv7UbXjrgCqSRvSq5j7BYswl2y35GMPZxE03h13EIDmmA6VKhgBfLrUYuyw/exec" + dateVal)
     .then(res => res.json())
     .then(data => {
       const container = document.getElementById("itemsContainer");
@@ -2443,28 +2471,41 @@ function searchByDate() {
 
 // ✅ Submit handler (Google Sheet এ পাঠাবে + localStorage এ সেভ করবে)
 function submitToSheet() {
-  const payload = new URLSearchParams({
-    dateTime: document.getElementById("dateTime").value,
-    requestFor: document.getElementById("requestFor").value,
-    airlineCodeBox: document.getElementById("airlineCodeBox").value,
-    flightNo: document.getElementById("flightNo").value,
-    requestedByERP: document.getElementById("requestedByERP").value,
-    requestedByName: document.getElementById("requestedByName").value,
-    reasonForRequest: document.getElementById("reasonForRequest").value,
-    approvedBy: document.getElementById("approvedBy").value,
-    item: document.getElementById("selectItems").value,
-    quantity: document.getElementById("qty").value,
-    type: document.getElementById("unit").value,
-    additionalNote: document.getElementById("additionalNote").value,
-    requisition: document.getElementById("requisitionNo").value
-  });
+  const rows = [...document.querySelectorAll(".itemRow")];
+  const itemRows = rows.map((row, i) => {
+    return {
+      idx: i + 1,
+      item: row.querySelector(".selectItems").value?.trim(),
+      qty: row.querySelector(".qty").value?.trim(),
+      unit: row.querySelector(".unit").value?.trim()
+    };
+  }).filter(r => r.item && r.qty && r.unit);
 
-  fetch("https://script.google.com/macros/s/AKfycbwqELWGXmA5Czj-qr-ggYeKZ0EafYVVG4ixh3E8KGfZzkAVhVC3ABPg_GGJ70LwliIDkQ/exec", {
+  // Basic validation
+  const invalid = itemRows.find(r => isNaN(Number(r.qty)) || Number(r.qty) <= 0);
+  if (invalid) {
+    alert(`Invalid qty at row ${invalid.idx}`);
+    return;
+  }
+
+  const payload = new URLSearchParams({
+    requestFor: document.getElementById("requestFor").value.trim(),
+    airlineCodeBox: document.getElementById("airlineCodeBox").value.trim(),
+    flightNo: document.getElementById("flightNo").value.trim(),
+    requestedByERP: document.getElementById("requestedByERP").value.trim(),
+    requestedByName: document.getElementById("requestedByName").value.trim(),
+    reasonForRequest: document.getElementById("reasonForRequest").value.trim(),
+    approvedBy: document.getElementById("approvedBy").value.trim(),
+    fileUpload: document.getElementById("fileUpload")?.value || "",
+    additionalNote: document.getElementById("additionalNote").value.trim(),
+    items: JSON.stringify(itemRows)
+  });
+  fetch("https://script.google.com/macros/s/AKfycbzvKCkOoIVDv7UbXjrgCqSRvSq5j7BYswl2y35GMPZxE03h13EIDmmA6VKhgBfLrUYuyw/exec", {
     method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: payload
+    headers: { "Content-Type": "application/x-www-form-urlencoded" }, // ✅ সঠিক header
+    body: payload.toString()  // ✅ সঠিকভাবে পাঠানো
   })
-    .then(response => response.text())
+    .then(response => response.text())   // 🔧 এখানে শুধু text হিসেবে নাও
     .then(result => {
       clearInterval(interval);
       progressBar.style.width = "100%";
@@ -2472,6 +2513,7 @@ function submitToSheet() {
       submitBtn.textContent = "Submitted ✅";
       submitBtn.classList.remove("processing");
 
+      // ✅ success message যোগ করা হলো
       const successMessage = document.createElement("div");
       successMessage.textContent = "✅ Your request has been submitted successfully!";
       successMessage.style.position = "absolute";
@@ -2495,10 +2537,15 @@ function submitToSheet() {
       // ✅ localStorage এও সেভ করো
       addNewSubmission();
 
-      // সর্বশেষ নম্বর সেভ করো
-      localStorage.setItem("lastReqNo", document.getElementById("requisitionNo").value);
+      let submissions = JSON.parse(localStorage.getItem("submissions")) || [];
+      submissions.push({
+        reqNo: document.getElementById("requisitionNo").value,
+        date: new Date().toISOString().split("T")[0],
+        data: payload
+      });
+      localStorage.setItem("submissions", JSON.stringify(submissions));
 
-      // 🔧 নতুন লাইন যোগ করা হলো → বক্সে আবার বসাও
+      localStorage.setItem("lastReqNo", document.getElementById("requisitionNo").value);
       document.getElementById("requisitionNo").value = localStorage.getItem("lastReqNo");
 
       setTimeout(() => {
@@ -2507,18 +2554,15 @@ function submitToSheet() {
         progressText.textContent = "0%";
         submitBtn.textContent = "Submit";
 
-// ফর্ম ক্লিয়ার করার সময়
-allFields.forEach(field => {
-  if (field.id !== "requisitionNo") {   // এখানে requisitionNo ব্যবহার করো
-    field.value = "";
-    field.style.backgroundColor = "";
-    field.style.border = "";
-  }
-});
+        allFields.forEach(field => {
+          if (field.id !== "requisitionNo") {
+            field.value = "";
+            field.style.backgroundColor = "";
+            field.style.border = "";
+          }
+        });
 
-// নতুন নম্বর বসানোর সময়
-document.getElementById("requisitionNo").value = generateReqNo();
-
+        document.getElementById("requisitionNo").value = generateReqNo();
       }, 4000);
     })
     .catch(error => {
