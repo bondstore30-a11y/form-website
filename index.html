@@ -1795,6 +1795,13 @@ itemOptions.push(
   "P090313-FOOT BALL THEME LINER",
   "P040553-BLACK TRAY FOR ROUND CONATINER",
   "P040553-BLACK TRAY FOR ROUND CONATINER",
+  "36303451-CCL AMENITY KIT",
+  "36303469-CCL AMENITY KIT",
+  "36303397-CCL AMENITY KIT",
+  "36303440-ECL AMENITY KIT",
+  "36301747-SLIPPER PAIR CCL BLUE WITH BANDEROLE",
+  "105340-VELERE PROSECCO ROSE 24 11% 75 CL",
+  "105370-JQ ROEDERER COLLECTION 12.5% 75CL",
   "P040571-VIP BOX TOP AND BOTTOM TYPE",
 );
 
@@ -2088,7 +2095,7 @@ function applyLiveBorderStyling() {
       }
     });
 
-  fetch("https://script.google.com/macros/s/AKfycbzvKCkOoIVDv7UbXjrgCqSRvSq5j7BYswl2y35GMPZxE03h13EIDmmA6VKhgBfLrUYuyw/exec", {
+  fetch("https://script.google.com/macros/s/AKfycbzMpg-gDLK4sT1NMAQlS5J5X8BfWCTyUwTiJ-ctAyg9ObLg4wKSpz0weCqBJI_vXDlloQ/exec", {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded"
@@ -2174,7 +2181,7 @@ setTimeout(() => {
     }
   });
 
-  fetch("https://script.google.com/macros/s/AKfycbzvKCkOoIVDv7UbXjrgCqSRvSq5j7BYswl2y35GMPZxE03h13EIDmmA6VKhgBfLrUYuyw/exec", {
+  fetch("https://script.google.com/macros/s/AKfycbzMpg-gDLK4sT1NMAQlS5J5X8BfWCTyUwTiJ-ctAyg9ObLg4wKSpz0weCqBJI_vXDlloQ/exec", {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded"
@@ -2302,7 +2309,7 @@ function showLatestReq() {
 
 // ✅ সর্বশেষ Req নম্বর দেখাও (Google Sheet থেকে)
 function showLatestReqFromSheet() {
-  fetch("https://script.google.com/macros/s/AKfycbzvKCkOoIVDv7UbXjrgCqSRvSq5j7BYswl2y35GMPZxE03h13EIDmmA6VKhgBfLrUYuyw/exec")
+  fetch("https://script.google.com/macros/s/AKfycbzMpg-gDLK4sT1NMAQlS5J5X8BfWCTyUwTiJ-ctAyg9ObLg4wKSpz0weCqBJI_vXDlloQ/exec")
     .then(res => res.json())
     .then(data => {
       if (data && data.length > 0) {
@@ -2404,7 +2411,7 @@ function searchSubmission() {
   const input = document.getElementById("searchNumber").value.trim();
   const searchNo = input.padStart(5, "0");
 
-  fetch("https://script.google.com/macros/s/AKfycbzvKCkOoIVDv7UbXjrgCqSRvSq5j7BYswl2y35GMPZxE03h13EIDmmA6VKhgBfLrUYuyw/exec" + searchNo)
+  fetch("https://script.google.com/macros/s/AKfycbzMpg-gDLK4sT1NMAQlS5J5X8BfWCTyUwTiJ-ctAyg9ObLg4wKSpz0weCqBJI_vXDlloQ/exec" + searchNo)
     .then(res => res.json())
     .then(data => {
       if (!data || data.length === 0) {
@@ -2438,15 +2445,18 @@ function searchSubmission() {
 // ✅ Search by date → Google Sheet থেকে ডেটা আনবে
 function searchByDate() {
   const dateVal = document.getElementById("searchDate").value;
-  fetch("https://script.google.com/macros/s/AKfycbzvKCkOoIVDv7UbXjrgCqSRvSq5j7BYswl2y35GMPZxE03h13EIDmmA6VKhgBfLrUYuyw/exec" + dateVal)
+
+  fetch("https://script.google.com/macros/s/AKfycbzMpg-gDLK4sT1NMAQlS5J5X8BfWCTyUwTiJ-ctAyg9ObLg4wKSpz0weCqBJI_vXDlloQ/exec?date=" + dateVal)
     .then(res => res.json())
     .then(data => {
       const container = document.getElementById("itemsContainer");
       container.innerHTML = "";
+
       if (!data || data.length === 0) {
         document.getElementById("searchMessage").textContent = "No submissions on this date";
         return;
       }
+
       data.forEach((row, index) => {
         const div = document.createElement("div");
         div.style.marginBottom = "8px";
@@ -2462,7 +2472,47 @@ function searchByDate() {
         `;
         container.appendChild(div);
       });
-      document.getElementById("searchMessage").textContent = "All submissions for this date loaded from Google Sheet";
+
+      document.getElementById("searchMessage").textContent =
+        "All submissions for this date loaded from Google Sheet";
+    })
+    .catch(err => {
+      document.getElementById("searchMessage").textContent = "Error: " + err;
+    });
+}
+
+function searchByReqNo() {
+  const reqNo = document.getElementById("searchReqNo").value;
+
+  fetch("https://script.google.com/macros/s/AKfycbzMpg-gDLK4sT1NMAQlS5J5X8BfWCTyUwTiJ-ctAyg9ObLg4wKSpz0weCqBJI_vXDlloQ/exec?req=" + reqNo)
+    .then(res => res.json())
+    .then(data => {
+      const container = document.getElementById("itemsContainer");
+      container.innerHTML = "";
+
+      if (!data || data.length === 0) {
+        document.getElementById("searchMessage").textContent = "No data found for this requisition";
+        return;
+      }
+
+      data.forEach((row, index) => {
+        const div = document.createElement("div");
+        div.style.marginBottom = "8px";
+        div.innerHTML = `
+          <label>Item ${index + 1}: </label>
+          <input type="text" value="${row.item || ""}" style="width:150px;" />
+          <label>Qty: </label>
+          <input type="text" value="${row.quantity || ""}" style="width:60px;" />
+          <label>Unit: </label>
+          <input type="text" value="${row.unit || ""}" style="width:80px;" />
+          <label>Req No: </label>
+          <input type="text" value="${row.requisition || ""}" style="width:80px;" />
+        `;
+        container.appendChild(div);
+      });
+
+      document.getElementById("searchMessage").textContent =
+        "Requisition data loaded successfully";
     })
     .catch(err => {
       document.getElementById("searchMessage").textContent = "Error: " + err;
@@ -2500,7 +2550,7 @@ function submitToSheet() {
     additionalNote: document.getElementById("additionalNote").value.trim(),
     items: JSON.stringify(itemRows)
   });
-  fetch("https://script.google.com/macros/s/AKfycbzvKCkOoIVDv7UbXjrgCqSRvSq5j7BYswl2y35GMPZxE03h13EIDmmA6VKhgBfLrUYuyw/exec", {
+  fetch("https://script.google.com/macros/s/AKfycbzMpg-gDLK4sT1NMAQlS5J5X8BfWCTyUwTiJ-ctAyg9ObLg4wKSpz0weCqBJI_vXDlloQ/exec", {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" }, // ✅ সঠিক header
     body: payload.toString()  // ✅ সঠিকভাবে পাঠানো
